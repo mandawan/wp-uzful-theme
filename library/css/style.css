@@ -917,6 +917,53 @@ a.greyimg:hover {
   -ms-filter: grayscale(0%);
   -o-filter: grayscale(0%);
 }
+/******************************************************************
+Site Name: Uzful.fr
+Author: 
+
+Stylesheet: AntiScroll jQuery plugin stylesheet
+
+******************************************************************/
+/********
+ STYLES
+********/
+.antiscroll-wrap {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.antiscroll-scrollbar {
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 1px #fff;
+  -moz-box-shadow: 0 0 1px #fff;
+  box-shadow: 0 0 1px #fff;
+  position: absolute;
+  z-index: 5;
+}
+.antiscroll-scrollbar-horizontal {
+  height: 7px;
+  margin-left: 2px;
+  bottom: 2px;
+  left: 0;
+  display: none;
+}
+.antiscroll-scrollbar-vertical {
+  width: 7px;
+  top: 0;
+}
+.antiscroll-inner {
+  overflow: scroll;
+  height: 100%;
+}
+.antiscroll-inner::-webkit-scrollbar,
+.antiscroll-inner::scrollbar {
+  width: 0;
+  height: 0;
+}
 /*
 BASE (MOBILE) SIZE 
 This is the average viewing window. So Desktops, Laptops, and 
@@ -945,7 +992,7 @@ body {
   color: #aaaaaa;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 input::-webkit-input-placeholder {
   color: white;
@@ -963,6 +1010,10 @@ input::-webkit-input-placeholder {
 }
 #container {
   background: white;
+}
+.antiscroll-scrollbar,
+#right-pane-container {
+  display: none;
 }
 /*********************
 LAYOUT & GRID STYLES
@@ -1247,12 +1298,17 @@ NAVIGATION STYLES
   position: absolute;
   background-color: #00c6ff;
   height: 100%;
-  width: 100%;
+  width: 350px;
+  right: 0;
+}
+#right-pane nav#anchr-nav {
+  height: 100%;
 }
 #right-pane ol#anchors-list {
   position: relative;
   z-index: 5;
   right: 0;
+  height: 100%;
   margin: 10px 0;
 }
 #right-pane ol#anchors-list li {
@@ -1315,7 +1371,8 @@ NAVIGATION STYLES
   bottom: 0;
   min-height: 100px;
   background-color: #009ecc;
-  width: 100;
+  width: 100%;
+  height: 250px;
   text-align: right;
   margin: 10px 0;
 }
@@ -2126,6 +2183,13 @@ tweeners.
   
   ******************************************************************/
   /*********************
+  GENERAL STYLES
+  *********************/
+  .antiscroll-scrollbar,
+  #right-pane-container {
+    display: block;
+  }
+  /*********************
   LAYOUT & GRID STYLES
   *********************/
   /*
@@ -2808,51 +2872,4 @@ be set to display none.
   nav {
     display: none;
   }
-}
-/******************************************************************
-Site Name: Uzful.fr
-Author: 
-
-Stylesheet: AntiScroll jQuery plugin stylesheet
-
-******************************************************************/
-/********
- STYLES
-********/
-.antiscroll-wrap {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-.antiscroll-scrollbar {
-  background: rgba(255, 255, 255, 0.5);
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 0 1px #fff;
-  -moz-box-shadow: 0 0 1px #fff;
-  box-shadow: 0 0 1px #fff;
-  position: absolute;
-  z-index: 5;
-}
-.antiscroll-scrollbar-horizontal {
-  height: 7px;
-  margin-left: 2px;
-  bottom: 2px;
-  left: 0;
-  display: none;
-}
-.antiscroll-scrollbar-vertical {
-  width: 7px;
-  top: 0;
-}
-.antiscroll-inner {
-  overflow: scroll;
-  height: 100%;
-}
-.antiscroll-inner::-webkit-scrollbar,
-.antiscroll-inner::scrollbar {
-  width: 0;
-  height: 0;
 }

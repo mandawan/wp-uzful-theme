@@ -22,13 +22,21 @@ function initHistory()
     console.log('fw');
     history.go(+1);
   });
+
+  histArray[0] = { title: 'home', url:params.rootURL, button: $('#history li:first')};
+
+  //TODO ici utiliser plutot le slot data() de jquery pour stocker les données historique dans chaque <li>
 }
 
 
 function buildHistory()
 {
   console.log("addToHistory :"+window.location.href);
-  var pUrl = rootURL+'#!/'+dataDisplayed[0] + '/' +  dataDisplayed[1];
+
+
+  if(params.firstPage) return;
+
+  var pUrl = params.rootURL+'#!/'+dataDisplayed[0] + '/' +  dataDisplayed[1];
   var pTitle = document.title;
     
   //if($.session.get('histArray') && $.session.get('histArray') != 'undefined')

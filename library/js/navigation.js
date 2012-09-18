@@ -2,11 +2,11 @@ var
     //FOR AJAX HISTORY NAV
   speed=30,
   history = window.history,
-  anchors,
+  $anchors,
+  $anchorsListMenu,
   //TIP
   $ = window.jQuery,
   //WEBSITE ROOT URL FOUND THROUGH JS
-  rootURL,
   cookieName = "uzful_fr_cookie",
   cookieOptions = { 
     //cookie expires after 1 day
@@ -21,7 +21,6 @@ var
   document = window.document,
   //ARRAY CONTAINING THE URI SECTIONS LEADING TO DATA TO LOAD
   dataToLoad = [],
-  EventManager = EventDispatcher.getInstance();
   dataDisplayed = [],
   mainContentSelector = '#content,article:first,.article:first,.post:first',
   headerContentSelector = '#inner-header:first',
@@ -42,24 +41,28 @@ function initanchorsListMenu()
   //console.log('--------------->',$('.antiscroll-inner'));
 
   //on init le context de la scrollbar
-  $.fn.waypoint.defaults.context = $('.antiscroll-inner');
-
+  console.log($('.antiscroll-inner'));
+  
   // a chaque chargement ajax terminé, on reconstruit le menu par ancres
-  $(EventManager).on('loadcomplete', constructanchorsListMenu);
+  $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete, constructanchorsListMenu);
+  $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete, constructanchorsListMenu);
 
   //création de l'anchor menu au onLoad  
   constructanchorsListMenu(); 
 }
 
-function constructanchorsListMenu()
+function constructanchorsListMenu(o)
 { 
+
   console.log('constructanchorsListMenu');
+  
+  $.fn.waypoint.defaults.context = $('.antiscroll-inner');
+
   //clear listeners
-  if(anchors && anchors.length)
-    anchors.unbind('waypoint.reached', anchorReached(event, direction));
+  if($anchors && $anchors.length)
+    $anchors.unbind('waypoint.reached', anchorReached);
   
   $anchors = $('#content:first #inner-content:first #main:first a.anchor');
-  $anchorsListMenu = $('#anchors-list');
   //console.log("anchorsListMenu :", $anchorsListMenu);
   //console.log("anchors :", $anchors);
   //listen to scroll events
@@ -109,10 +112,10 @@ function constructanchorsListMenu()
 
       
       var $button = $anchorsListMenu.children('#anchor-link-'+$target.attr('id'));
-      //console.log($button);
       $button.data('target', $target);
       
       $target.data('button', $button);
+       $anchorsListMenu.children('li').css('height', 100/$anchors.length+'%')
     });
 
   }
@@ -130,9 +133,9 @@ AJAX LOADING
 function initNavListeners()
 {
   //TRANSITIONS DE CHARGEMENT AJAX
-  $(EventManager).on('load_ready', transFadeIn);
-  $(EventManager).on('loadcomplete', transFadeOut);
-  $(EventManager).on('transition_outComplete', transitionOutComplete);
+  $myEventDisatchObj.on(customEvents.AJAXLoadEventReady, transFadeIn);
+  $myEventDisatchObj.on(customEvents.AJAXLoadEventComplete, transFadeOut);
+  $myEventDisatchObj.on(customEvents.contentFadeInComplete, transitionOutComplete);
 
   //'<li class="white history-page" rel="http://127.0.0.1/uzful.fr/www/" onClick="clickNavigate(this)"></li>');
   
@@ -163,6 +166,10 @@ function navigateTo(pTarget)
 {
 
   console.log("navigate to "+pTarget);
+
+  // ce n'est aps le premier chargement de page, donc ce n'est pas la première page vue
+  if(!params.firstLoad) params.firstPage = false;
+
   var url;
   if(typeof(pTarget)==='string'){
     url = pTarget;
@@ -170,16 +177,16 @@ function navigateTo(pTarget)
     var arg = (url.indexOf('#!/') >= 0) ? url.substring(url.indexOf(hashtag)+3) : '';
     //global rootURL trouvé en JS
     //TODO : remplacer par du PHP si nécessaire ?
-    rootURL = String(url).slice(0, String(url).indexOf(hashtag));
+    params.rootURL = String(url).slice(0, String(url).indexOf(hashtag));
 
     //ON RENSEIGNE LES DONNEES A CHARGER PAR NIVEAU
     var reg=new RegExp("[ /;]+", "g");
     dataToLoad = String(arg).split(reg);
     requestedURI = url
     //on construit l'url de niveau 1 
-    var urlToLoad = rootURL+dataToLoad[0];
+    var urlToLoad = params.rootURL+dataToLoad[0];
       
-    console.log("parameters:",arg, rootURL);
+    console.log("parameters:",arg, params.rootURL);
     if(url && $('#history li:last-child').attr('rel') !== url)
     {
       //console.log(dataToLoad);
@@ -198,8 +205,8 @@ function navigateTo(pTarget)
     {
       dataToLoad[1]=target;
       dataToLoad[0]=dataDisplayed[0]
-      urlToLoad = rootURL+dataDisplayed[0]+ '/' + dataToLoad[1] + '/';
-      requestedURI = rootURL + hashtag + dataDisplayed[0]+ '/' + dataToLoad[1] + '/';
+      urlToLoad = params.rootURL+dataDisplayed[0]+ '/' + dataToLoad[1] + '/';
+      requestedURI = params.rootURL + hashtag + dataDisplayed[0]+ '/' + dataToLoad[1] + '/';
 
       if(urlToLoad && $('#history li:last-child').attr('rel') !== urlToLoad)
       {
@@ -237,7 +244,7 @@ function ajaxLoadToContainer(link)
     $container.addClass('loading');
 
 
-  var $oldFull = $('#main div[data-fullcontent="' + rootURL + "#!/" + dataDisplayed[0]  + '/' + dataDisplayed[1] + '/"]');
+  var $oldFull = $('#main div[data-fullcontent="' + params.rootURL + "#!/" + dataDisplayed[0]  + '/' + dataDisplayed[1] + '/"]');
   var $oldSum = $('#sum-' + $oldFull.attr('rel'));
 
   if($oldFull && $oldFull.html())
@@ -286,10 +293,9 @@ function ajaxLoadToContainer(link)
 
 
                     //loading has ended let's trigger transition
-                    refreshDisplay();
 
                     $.debounce(function() {
-                      $(EventManager).trigger({ type:"loadcomplete", data:link, to:$container});
+                      $($myEventDisatchObj).trigger({ type:customEvents.AJAXLoadEventComplete, data:link, to:$container});
 
                       if(!transiting)
                       {
@@ -336,14 +342,14 @@ function entirePageAjaxNavigateTo (link)
     //on lance le chargement du niveau 2
     else
     {
-      ajaxLoadToContainer(rootURL+dataToLoad[0]+'/'+dataToLoad[1]);
+      ajaxLoadToContainer(params.rootURL+dataToLoad[0]+'/'+dataToLoad[1]);
       return;
     }
   }
 
 
   //we wait for transition to loading to be complete
-  $(EventManager).one("transition_inComplete", function(o) {
+  $($myEventDisatchObj).one(customEvents.contentFadeOutComplete, function(o) {
     $.scrollTo(0);
     console.log('loading level 1 start ->'+link);
 
@@ -370,7 +376,6 @@ function entirePageAjaxNavigateTo (link)
                     $headerContainer.html($headerContent.html())
 
                     $container.show();
-                    refreshDisplay();
 
                     //console.log($container);
 
@@ -382,7 +387,7 @@ function entirePageAjaxNavigateTo (link)
                       //loading has ended let's trigger transition
                       $.debounce(function() {
                         
-                        $(EventManager).trigger({ type:"loadcomplete", data:link, to:undefined });
+                        $($myEventDisatchObj).trigger({ type:customEvents.AJAXLoadEventComplete, data:link, to:undefined });
                         
                         // Will only execute 300ms after.
                       }, 300)();
@@ -391,7 +396,7 @@ function entirePageAjaxNavigateTo (link)
                     }
                     //on lance le chargement du niveau 2
                     else
-                      ajaxLoadToContainer(rootURL+dataToLoad[0]+'/'+dataToLoad[1]);
+                      ajaxLoadToContainer(params.rootURL+dataToLoad[0]+'/'+dataToLoad[1]);
 
                     dataDisplayed[0] = dataToLoad[0];
                     //on vide le niveau 1 de la requête
@@ -408,7 +413,7 @@ function entirePageAjaxNavigateTo (link)
   }); //end one bind
   
   //on déclenche la transition out
-  $(EventManager).trigger({ type:"load_ready", data:link, to:undefined });
+  $($myEventDisatchObj).trigger({ type:customEvents.AJAXLoadEventReady, data:link, to:undefined });
   
 
 
@@ -419,16 +424,9 @@ function transFadeIn(o){
   console.log('transFadeIn');
   var pane = $('#transition-pane');
 
-  if(o.type === 'load_ready' && !transiting)
+  if(o.type === customEvents.AJAXLoadEventReady && !transiting)
   {
     transiting = true;
-
-    refreshDisplay();
-
-    //TEMP
-    //$('body').css('background-color', "red");
-
-
     pane.css('margin-right', '0').css('left', $('body').width()+'px').show().animate( {
 
       'left':0,
@@ -441,14 +439,13 @@ function transFadeIn(o){
       },
       complete:function(){
         buildHistory(); 
-        $(EventManager).trigger({ type:"transition_inComplete" });
+        $($myEventDisatchObj).trigger({ type:customEvents.contentFadeOutComplete });
       }
       
     });
   }
   else
   {
-    refreshDisplay();
     pane.show().css('left',0);
   }
 }
@@ -457,14 +454,8 @@ function transFadeOut(o){
   console.log('transFadeOut', transiting);
   var pane = $('#transition-pane');  
   
-  if(o.type === 'loadcomplete' && transiting)
+  if(o.type === customEvents.AJAXLoadEventComplete && transiting)
   {
-
-    
-    //on recontstruit le menu historique
-    //buildHistory();                   
-
-    refreshDisplay();
 
     //TEMP
     //$('body').css('background-color', "white");
@@ -491,7 +482,7 @@ function transFadeOut(o){
           {
             console.log('pane bottom to top -> ok');
             pane.hide();
-            $(EventManager).trigger({ type:"transition_outComplete" });
+            $($myEventDisatchObj).trigger({ type:customEvents.contentFadeInComplete });
             transiting = false;
           }
         });
@@ -503,9 +494,7 @@ function transFadeOut(o){
     transiting = false;
     pane.hide();
     
-    refreshDisplay();
-    
-    $(EventManager).trigger({ type:"transition_outComplete" });
+    $($myEventDisatchObj).trigger({ type:customEvents.contentFadeInComplete });
   }
 }
 
@@ -517,28 +506,3 @@ function transitionOutComplete(o)
   if(targetToScrollTo.length == 1)
     $.scrollTo(targetToScrollTo, 800, {easing:'swing'});
 }
-
-jQuery(document).ready(function($) {
-
-    
-    initNavListeners();
-    //myHistory.js
-    //initanchorsListMenu();
-    initHistory();
-    
-
-
-    //hash change
-    $(window).hashchange( function(){
-        
-        //requete navigation
-        navigateTo(window.location.href);
-    });
-    
-    //détection d'un hash onload   
-    if(document.location.hash.substring(3)!==''){
-        console.log('hashchange on ready '+window.location.hash.substring(3));
-        $(window).trigger( 'hashchange' );
-    }
-  
-});

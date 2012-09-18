@@ -462,6 +462,13 @@ upon your base.scss styles.
 
 ******************************************************************/
 /*********************
+GENERAL STYLES
+*********************/
+.antiscroll-scrollbar,
+#right-pane-container {
+  display: block;
+}
+/*********************
 LAYOUT & GRID STYLES
 *********************/
 /*

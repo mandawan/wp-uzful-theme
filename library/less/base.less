@@ -26,7 +26,7 @@ body {
 	color: @uzful-dark-grey;
 	width:100%;
 	height:100%;
-	overflow:hidden;
+	overflow-y:hidden;
 }
 
 input::-webkit-input-placeholder {
@@ -44,6 +44,9 @@ input::-webkit-input-placeholder {
 	//position: absolute;
 }
 
+.antiscroll-scrollbar, #right-pane-container{
+	display: none;
+}
 
 /*********************
 LAYOUT & GRID STYLES
@@ -311,10 +314,11 @@ NAVIGATION STYLES
 	position: absolute;
 	background-color: @main-theme-color;
 	height: 100%;
-	width: 100%;
+	width: 350px;
+	right:0;
 	//z-index: 2;
 	nav#anchr-nav{
-
+		height: 100%;
 	}
 	ol#anchors-list
 	{
@@ -323,7 +327,7 @@ NAVIGATION STYLES
 		//top: 20px;
 		//float: right;
 		right: 0;
-		//height: 100%;
+		height: 100%;
 		margin:10px 0;
 		//width: 15px;
 		
@@ -396,7 +400,8 @@ NAVIGATION STYLES
 		bottom:0;
 		min-height: 100px;
 		background-color: @main-theme-color-dark;
-		width: 100;
+		width: 100%;
+		height: 250px;
 		text-align:right;
 		margin:10px 0;
 	}

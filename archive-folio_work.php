@@ -80,7 +80,7 @@ $the_query = new WP_Query("post_type=folio_work&post_status=publish&posts_per_pa
 							    	<h2 class="h3"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 									<p class="subtitle"><?php echo $subtitle ?></p>
 							    	<p class="meta"><?php //_e('Posted', 'uzfultheme'); ?> Réalisé en <time datetime="<?php echo the_time('m-Y'); ?>" pubdate><strong><?php the_time('F Y'); ?></strong></time> pour <span class="client-name"><strong><?php echo $client_name; ?></strong></span></p>
-							    	<a class="button-more button-cta plus " href="<?php bloginfo('siteurl'); ?>/works/"><span id="text">Découvrir ce projet</span><span id="plus"></span></a>
+							    	<a class="button-more button-cta plus " href="<?php the_permalink(); ?>"><span id="text">Découvrir ce projet</span><span id="plus"></span></a>
 							    </div>
 							</div>
 							<?php //continue; ?>

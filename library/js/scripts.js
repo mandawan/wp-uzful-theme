@@ -4,35 +4,87 @@ Author: Eddie Machado ->  Emmanuel Baufils
 
 */
 
+
+
+/***********************************************************************************************************
+EventDispatcher singleton class --> for custom jQuery (or native custom events if u like) events
+***********************************************************************************************************/
+
+function EventDispatcher() {
+  
+  // quelques propriétés
+  this.id = Math.floor(Math.random()*1000);
+  if ( EventDispatcher.caller != EventDispatcher.getInstance ) {
+      throw new Error("This object cannot be instanciated");
+  }
+}
+  
+// propriété statique qui contient l'instance unique
+EventDispatcher.instance = null;
+  
+EventDispatcher.getInstance = function() {
+    if (this.instance == null) {
+        this.instance = new EventDispatcher();
+    }
+  console.log("id ED : "+this.instance.id);
+  return this.instance;
+}
+
+
+
+
+/**********************************************************************************************************
+VARIABLES AND CONSTANTS
+***********************************************************************************************************/
+
+
 var $mainwrapper = $('#main-wrapper'),
     scroller,
+    customEvents = {
+        AJAXLoadEventComplete:      'AJAXLoadEventComplete',
+        AJAXLoadEventReady:         'AJAXLoadEventReady',
+        imagesLoadEventComplete:    'imagesLoadEventComplete',
+        contentFadeOut:             'contentFadeOut',
+        contentFadeIn:              'contentFadeIn',
+        contentFadeOutComplete:     'contentFadeOutComplete',
+        contentFadeInComplete:      'contentFadeInComplete'
+    }
     viewport = {
         width:$(window).width(),
         height:$(window).height(),
         firstResize:true
-    };
-
-
+    },
+    params = {
+        firstLoad:true,
+        firstPage:true,
+        rootURL:''
+    }
+    $myEventDisatchObj = $(EventDispatcher.getInstance()),
+    $anchorsListMenu = $('#anchors-list');
   
 
 
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
-
-
+    //on resize
     $(window).on('resize', function()
     {
-        //VIEWPORT
+        //VIEWPORT object update
         viewport.width = $(window).width();
         viewport.height = $(window).height();
         viewport.firstResize = false;
 
+        console.log($("resize", '.antiscroll-inner'));
+
+        //JS scrollbar object update
         //antiscroll
         scroller.refresh();
+
+        refreshDisplay();
     });
 
-    /*
-    nice scroll
+/*
+    nice scroll set up - Antiscroll.js
     */   
     $(function () {
         $mainwrapper
@@ -41,9 +93,9 @@ jQuery(document).ready(function($) {
         .wrap('<div class="antiscroll-inner" />')
         .wrap('<div class="box-inner" />');
 
-        initanchorsListMenu();
         
         $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
+        console.log("setup antiscroll", $('.antiscroll-inner'));
         scroller = $('#box-antiscroll').antiscroll().data('antiscroll');
 
         // $(window).resize(function() {
@@ -51,45 +103,105 @@ jQuery(document).ready(function($) {
         // });
         
         //refresh du scroll on content ajax load
-        $(EventDispatcher.getInstance()).on("loadcomplete", function() {
-          scroller.refresh();
-          console.log("content loaded -> refresh scrollbar");
-        });
-                    
+        $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete+' '+customEvents.imagesLoadEventComplete, function(o) {
 
-    });
+          scroller.refresh();
+          refreshDisplay();
+          //console.log("content loaded -> refresh scrollbar");
+          
+        });
+    });    
+
+    var $rp = $('#right-pane');
+    console.log("$rp:",$rp);
+
+    $rp.hover(function()
+    {
+        console.log('mouseover!');
+        var span = $(this).children('a').children('div');
+        $rp.stop();
+        $rp.animate({
+                width:350
+            }, {
+                duration:300,
+                easing:'linear',
+                complete:function(){
+                    $anchorsListMenu.children('li').children('a').show(100);       
+                }   
+           
+         });
+    },
+    function()
+    {
+        console.log('mouseout!');
+        $rp.stop();
+        $anchorsListMenu.children('li').children('a').hide(100, function()
+        {
+            $rp.animate({
+                width:13
+                }, {    
+                duration:300,
+                easing:'swing'
+                }, {
+                complete:function(){
+                }
+            });
+        });
+        
+    })
+    //hide the lateral bar on the first load
+    $rp.animate({width:13}, {duration:300});
     
 
     //Home item-work loading & masonry
     var hw = $('#home-works');
-    if(hw.length)
+    var firstLoad = true;
+    if(hw.length && firstLoad)
     {
-        var itemW = $(hw).find('.item-work');
+        var itemW = $(hw).find('.item-work img');
         var itemWCount = itemW.length;
         var iwloadedCount = 0;
         hw.addClass('loading');
-        itemW.hide().find('img').load(function(){
-            console.log('image work loaded');
+        itemW.hide().load(function(){
             iwloadedCount++;
-            
-            var target = $(this);
 
+            hw.removeClass('loading');
+
+            
+            //console.log('image work loaded', iwloadedCount);
+
+            var target = $(this);
+            console.log(target.width());
             //cosmeto wordings
             target.parent().parent().find('#work-title').css('width', target.width());
             target.parent().parent().find('#work-subtitle').css('width', target.width());
             
+            target.show();
+
+            $(hw).find('.masonry').masonry({ itemSelector: '.item-work', gutterWidth: 25, columnWidth: function( containerWidth ) { return (containerWidth-189) / 8; }});
+
+
+            $myEventDisatchObj.trigger(customEvents.imagesLoadEventComplete);
             //toutes les images sont chargées, on execute masonry et on montre la section
-            if(iwloadedCount >= itemWCount)
+            if(iwloadedCount === itemWCount)
             {
-                console.log('all images work loaded -> show section');
+                //console.log('all images work loaded -> show section');
                 
-                hw.removeClass('loading');
-                $(hw).find('.masonry').masonry({ itemSelector: '.item-work', gutterWidth: 25, columnWidth: function( containerWidth ) { return (containerWidth-189) / 8; }});
                 
-                refreshDisplay();
+               
+                firstLoad = false;
+                var iwShownCount = 0;
                 itemW.show(0, function()
                     {
-                        $(EventDispatcher.getInstance()).trigger("loadcomplete");
+
+                       iwShownCount++;
+                       //console.log(iwShownCount, itemWCount);
+                        if(iwShownCount === itemWCount)
+                        {
+                            
+                            
+                           
+                        }
                     });
 
 
@@ -101,9 +213,8 @@ jQuery(document).ready(function($) {
     }
 
 
-
     
-    //Google maps
+    //Google maps (footer)
     var $map = $('#map');
     console.log($map);
     if($map.length)
@@ -133,7 +244,7 @@ jQuery(document).ready(function($) {
     }
 
     
-    //Button-more (load more content)
+    //Button-more (load more content panel AJAX)
     var bm = $('a.button-more');
     if(bm.length)
     {
@@ -186,6 +297,7 @@ jQuery(document).ready(function($) {
             }         
         });
     }
+
     function initSlideMore(element){
         if(element.find('p'))
         {
@@ -201,7 +313,7 @@ jQuery(document).ready(function($) {
     //helper
     console.log($('#helper'));
 	/*    
-$('#helper').each(function() {
+    $('#helper').each(function() {
         var $dialog = $(this);
         $dialog
             .dialog({
@@ -212,11 +324,35 @@ $('#helper').each(function() {
                 resizable:false,
                 draggable:false
             })
-//load($dialog.attr('data-rel'));
+    //load($dialog.attr('data-rel'));
        
         $dialog.dialog('open');
     });
 	*/
+
+    //listen to hashchange and act so..
+    initNavListeners();
+    //anchors nav on scrollbar
+    initanchorsListMenu();
+    //history left menu
+    initHistory();
+    
+
+
+    //hash change
+    $(window).hashchange( function(){
+        
+        //requete navigation
+        navigateTo(window.location.href);
+    });
+    
+    //détection d'un hash onload   
+    if(document.location.hash.substring(3)!==''){
+        console.log('hashchange on ready '+window.location.hash.substring(3));
+        $(window).trigger( 'hashchange' );
+    }
+  
+
 
     /*
     Responsive jQuery is a tricky thing.
@@ -252,6 +388,12 @@ $('#helper').each(function() {
     if (responsive_viewport > 1030) {
         
     }
+
+
+    //OK TOUT EST FINI
+    params.firstLoad = false;
+
+    
      
 }); /* end of as page load scripts */
 
@@ -310,32 +452,6 @@ if (!window.getComputedStyle) {
 	w.addEventListener( "devicemotion", checkTilt, false );
 })( this );
 
-
-/***********************************************************************************************************
-EventDispatcher singleton class --> for custom jQuery (or native custom events if u like) events
-***********************************************************************************************************/
-
-function EventDispatcher() {
-  
-  // quelques propriétés
-  this.id = Math.floor(Math.random()*1000);
-  if ( EventDispatcher.caller != EventDispatcher.getInstance ) {
-      throw new Error("This object cannot be instanciated");
-  }
-}
-  
-// propriété statique qui contient l'instance unique
-EventDispatcher.instance = null;
-  
-EventDispatcher.getInstance = function() {
-    if (this.instance == null) {
-        this.instance = new EventDispatcher();
-    }
-  console.log("id ED : "+this.instance.id);
-  return this.instance;
-}
-
-
 //MISC
 function randomArrayValue(array) {
     if(array.length)
@@ -343,7 +459,8 @@ function randomArrayValue(array) {
     else return 0;
 }
 function refreshDisplay()
-{
+{   
+    $('#transition-pane').css({'left':0, 'top':0, 'margin':0});
     $('#transition-pane').height(viewport.height);    
     $('#transition-pane').width(viewport.width);    
 }   
