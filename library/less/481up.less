@@ -1,0 +1,331 @@
+/******************************************************************
+Site Name: 
+Author: 
+
+Stylesheet: 481px and Up Stylesheet
+
+This stylesheet is loaded for larger devices. It's set to 
+481px because at 480px it would load on a landscaped iPhone.
+This isn't ideal because then you would be loading all those
+extra styles on that same mobile connection. 
+
+A word of warning. This size COULD be a larger mobile device,
+so you still want to keep it pretty light and simply expand
+upon your base.scss styles.
+
+******************************************************************/
+
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+
+	/*
+		This is a combination composed 1024px 8 cols grid based on Creaktif PSDs Grid.
+	*/
+	.onecol    { width: 10.09375%;  }     	   /* grid_1  */
+	.twocol    { width: 22.9375%; }       /* grid_2  */
+	.threecol  { width: 35.78125%; }       /* grid_3  */
+	.fourcol,
+	.fivecol,
+	.sixcol, 
+	.sevencol,
+	.eightcol{ width: 100%; }  /* grid_8  */
+
+	.fourcol,
+	.fivecol,
+	.sixcol, 
+	.sevencol,
+	.eightcol {margin-left:0;}
+
+	
+/*********************
+NAVIGATION STYLES
+*********************/
+
+.nav {}
+
+	/* .menu is clearfixed inside mixins.scss */
+	.menu {
+
+		//NOTE:remove following property
+		margin-left: 50px;
+
+		ul {
+			li {
+				a {
+					
+					/*
+					you can use hover styles here even though this size
+					has the possibility of being a mobile device.
+					*/
+					&:hover, &:focus {
+					
+					}
+				}
+				
+				&:first-child {}
+				&:last-child {}
+				
+				/*
+				plan your menus and drop-downs wisely.
+				*/
+				ul.sub-menu,
+				ul.children {
+					li {
+						a {
+							&:hover,
+							&:focus {}
+							&:link {}
+						}
+						&:first-child {}
+						&:last-child {}
+					}
+				}
+			} /* end .menu ul li */
+			
+			/* highlight current page */
+			li.current-menu-item, 
+			li.current_page_item,
+			li.current-page-ancestor {
+				a {}
+			}  /* end current highlighters */
+		} /* end .menu ul */
+	} /* end .menu */
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+
+//TODO : plutôt faire le background (responsive de facto) ainsi :
+/*
+background-image: -moz-linear-gradient(center bottom, #dacdb1 11%, #f0e8d8 56%);  
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.11, #dacdb1), color-stop(0.56, #f0e8d8));  
+*/
+
+section {
+	background: url(../images/separateur-481.png) transparent left top no-repeat;
+}
+
+
+/* article header */
+.article-header {
+	.thumbnail{
+		
+	} 
+}
+.alignleft, img.alignleft { 
+		margin-right: 0.3em; 
+		display: inline; 
+		float: left; 
+}
+/* post content */
+.post-content {
+			
+	
+	/* at this larger size, we can start to align images */
+	.alignleft, img.alignleft { 
+		margin-right: 0.3em; 
+		display: inline; 
+		float: left; 
+	}
+	.alignright, img.alignright { 
+		margin-left: 0.3em; 
+		display: inline; 
+		float: right; 
+	}
+	.aligncenter, img.aligncenter { 
+		margin-right: auto; 
+		margin-left: auto; 
+		display: block; 
+		clear: both; 
+	}
+
+}
+ /* end .post-content */
+
+
+/* spécialindex */
+.index {
+	position:relative;  
+   	z-index: 0; 
+	#animation-home {
+		margin-bottom: 32px;
+
+		h1 {
+		}
+	}
+
+	section 
+	{
+		display: block;
+		padding-top:60px;
+		padding-bottom: 85px;
+		
+		//background: white;
+
+		&:before {/*
+			top: 0px;
+			left: 5%;
+			width: 90%;
+			height: 50px;
+			border-radius: 125px / 12px;
+			box-shadow: 0 0 8px #555;*/
+		}
+		&:after {
+			/*bottom: 0px;
+			left: 5%;
+			width: 90%;
+			height: 50px;
+			border-radius: 125px / 12px;
+			box-shadow: 0 0 8px #565656;*/
+		}
+	}
+
+	p.content-more {
+		margin-top: 25px;
+		height: 120px;
+	}
+
+
+	div.content-more {		
+		margin-top:6px;
+
+		//
+		p {
+			padding:25px 1.2em 25px 1.2em;
+			margin:0;
+			-moz-column-count: 2; -webkit-column-count: 2; -moz-column-gap: 1em; -webkit-column-gap: 1.5em;
+		}
+
+
+	}	
+
+	#home-works
+	{
+		article {
+			margin-bottom: 27px;
+			//margin-left: 27px;
+		}
+	}
+
+	#home-offers {
+		a, a:active, a:hover {text-decoration: none;}
+		.title-wrap {
+			height:55px; display:table; width:100%;
+
+			div {display:table-cell;vertical-align:bottom;
+
+			}
+			.first {
+					//width: 75px;
+			}
+			img {
+				margin: 0;
+			}
+		}
+
+		h3, .h3 {
+			margin-left: 14px;
+		}
+
+		article {
+			width:48%;
+			margin-left:2%;
+			float:left;
+		}
+	}
+
+	#home-extensions {
+
+		article p {
+			-moz-column-count: 1; -webkit-column-count: 1; -moz-column-gap: 0; -webkit-column-gap: 0;
+		}
+	}
+	
+}
+
+
+/* end spécialindex */
+
+/* SPECIAL FOLIO WORKS */
+section.type-folio_work {
+
+	display: block;
+	padding:48px 0;
+
+	.offers a { 
+		max-width: 75px;
+		.post-content > .alignleft;
+		margin-left: 0; margin-right: 10px; 
+		
+		img {margin-bottom: 0;}
+	}
+
+	.chapeau {
+		//travail présenté en petit
+		width: 74.3125%-10.09375%*0.2;
+		//margin-left:5px;
+		h2 {
+		.small {
+			font-size: 60%;
+			line-height: 0.5em;
+		}
+		p {margin: 0;}
+
+		margin-top: -0.2em;
+		margin-bottom: 5px;
+	}
+}
+
+	#ressources img { margin-bottom: 0; }
+}
+/* end .type-folio_work */
+
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+
+/* search form */
+div#search { margin-bottom: 15px; }
+#search-form-wrap
+{
+	//width:314px;
+	margin-top:-5px;
+
+	div { display: table-cell; }
+
+}
+#searchform {
+	
+	#s {  }
+
+	input.search {
+		line-height: 16px;
+		//height: 16px;
+		//font-size: 1.8em;
+		width:270px;
+		padding: 7px;
+		z-index: 100;
+		//-moz-box-shadow:inset 2px 2px 5px #ccc;
+		//box-shadow:inset 2px 2px 5px #ccc;
+	}
+
+	input.submit {}
+}
+
+
+/*********************
+FOOTER STYLES
+*********************/
+	
+/*
+check your menus here. do they look good?
+do they need tweaking?
+*/
+.footer-links {
+	ul {
+		li {}
+	}
+} /* end .footer-links */
+			

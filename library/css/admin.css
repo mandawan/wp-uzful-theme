@@ -1,0 +1,49 @@
+/********************************
+BACK OFFICE META BOXES STYLES
+********************************/
+.my_meta_control ol,
+.my_meta_control ul {
+  list-style: none;
+  list-style-image: none;
+}
+.my_meta_control ol li,
+.my_meta_control ul li {
+  margin: 0;
+  padding: 0;
+  line-height: 19px;
+  word-wrap: break-word;
+}
+.my_meta_control .big {
+  font-size: 3em;
+}
+.my_meta_control label {
+  display: block;
+}
+.my_meta_control label span {
+  display: inline;
+  font-weight: normal;
+}
+.my_meta_control span {
+  color: #999;
+  display: block;
+}
+.my_meta_control textarea,
+.my_meta_control input[type='text'] {
+  margin-bottom: 3px;
+  width: 99%;
+}
+.my_meta_control h4 {
+  color: #999;
+  font-size: 1em;
+  margin: 15px 6px;
+  text-transform: uppercase;
+}
+.my_meta_control .tabs-panel {
+  border-color: #DFDFDF;
+  background-color: white;
+  height: 200px;
+  overflow: auto;
+  padding: .5em .9em;
+  border-style: solid;
+  border-width: 1px;
+}
