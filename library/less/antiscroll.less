@@ -24,6 +24,7 @@ body {
 }
 
 .antiscroll-scrollbar {
+  cursor:pointer;
   background: fade(white,50%);
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -33,6 +34,9 @@ body {
   box-shadow: 0 0 1px #fff;
   position: absolute;
   z-index:5;
+  &:hover, &:active {
+    cursor:pointer;
+  }
 }
 
 .antiscroll-scrollbar-shown {

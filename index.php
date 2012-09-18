@@ -5,17 +5,19 @@
 				<div id="inner-header" class="wrap clearfix">
 					
 					<!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
-					<p id="logo" class="h1"><a href="<?php echo home_url(); ?>" rel="nofollow"><?php //bloginfo('name'); ?></a></p>
-					
-					<div id="animation-home" class="clearfix  first">
-						<h1>
-							<div id="s1" class="title-block">Agence digitale</div>
-							<div id="s2" class="title-block">& social media</div>
-							<div id="s3" class="title-block blue">à vocation utile</div>
-						</h1>
+					<div id="header-content">
+						<p id="logo" class="h1"><a href="<?php echo home_url(); ?>" rel="nofollow"><?php //bloginfo('name'); ?></a></p>
+						
+						<div id="animation-home" class="clearfix  first">
+							
+							<h1>
+								<div id="s1" class="title-block">Agence digitale</div>
+								<div id="s2" class="title-block">& social media</div>
+								<div id="s3" class="title-block blue">à vocation utile</div>
+							</h1>
 
-					</div> <!-- end animation -->															
-					
+						</div> <!-- end animation -->															
+					</div><!-- end header-content -->	
 				
 				</div> <!-- end #inner-header -->
 

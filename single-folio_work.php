@@ -45,11 +45,19 @@ single-bookmarks.php
 							    //WHAT WE NEED -NO NATIVE- TO DYNAMICALLY GRAB
 
 							     //CLIENT OU EXTENSION COMMANDITAIRE CE PROJET
-							    $client = get_user_by('id', get_post_meta($post->ID, '_work_rel_client', false)[0]);
+							    $relclient = get_post_meta($post->ID, '_work_rel_client', false);
+							    if(count($relclient))
+							    	$relclient = $relclient[0];
+							    
+							    $client = get_user_by('id', $relclient);
+
 
 							    if(!$client)
 							    {
-							    	$myExt = get_post(get_post_meta($post->ID, '_work_rel_ext', false)[0]);
+							    	$relExt = get_post_meta($post->ID, '_work_rel_ext', false);
+							    	if(count($relExt))
+							    		$relExt = $relExt[0];
+							    	$myExt = get_post($relExt);
 							    	$client_name = $myExt->post_title;
 							    }
 							    else

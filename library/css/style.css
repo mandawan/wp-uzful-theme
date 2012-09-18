@@ -934,6 +934,7 @@ Stylesheet: AntiScroll jQuery plugin stylesheet
   position: relative;
 }
 .antiscroll-scrollbar {
+  cursor: pointer;
   background: rgba(255, 255, 255, 0.5);
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -943,6 +944,10 @@ Stylesheet: AntiScroll jQuery plugin stylesheet
   box-shadow: 0 0 1px #fff;
   position: absolute;
   z-index: 5;
+}
+.antiscroll-scrollbar:hover,
+.antiscroll-scrollbar:active {
+  cursor: pointer;
 }
 .antiscroll-scrollbar-horizontal {
   height: 7px;
@@ -1628,20 +1633,23 @@ POSTS & CONTENT STYLES
 }
 /* index */
 p#logo {
+  display: none;
   margin-top: 280px;
   height: 187px;
   width: 60px;
   background: #00c6ff url(../images/uzful-bg-blue.png) no-repeat;
   float: left;
+  position: absolute;
 }
 #animation-home {
   margin-top: 280px;
   min-height: 100px;
   float: left;
+  padding-left: 60px;
   display: block;
+  background: #00c6ff url(../images/uzful-bg-blue.png) no-repeat;
 }
 #animation-home h1 {
-  display: table;
   background: white;
   padding-left: 20px;
   height: 100%;
@@ -2351,7 +2359,7 @@ tweeners.
     text-decoration: none;
   }
   .index #home-offers .title-wrap {
-    height: 55px;
+    /*height:55px;*/
     display: table;
     width: 100%;
   }

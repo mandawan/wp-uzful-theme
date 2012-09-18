@@ -45,7 +45,7 @@ function initanchorsListMenu()
   
   // a chaque chargement ajax terminé, on reconstruit le menu par ancres
   $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete, constructanchorsListMenu);
-  $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete, constructanchorsListMenu);
+  
 
   //création de l'anchor menu au onLoad  
   constructanchorsListMenu(); 
@@ -55,8 +55,8 @@ function constructanchorsListMenu(o)
 { 
 
   console.log('constructanchorsListMenu');
-  
-  $.fn.waypoint.defaults.context = $('.antiscroll-inner');
+  if($('.antiscroll-inner').length)
+    $.fn.waypoint.defaults.context = $('.antiscroll-inner');
 
   //clear listeners
   if($anchors && $anchors.length)
@@ -154,9 +154,6 @@ function clickNavigate(element)
   else if($(element).is('.anchor-link'))
   {
     navigateTo(element);
-    /*var target = $(element).data('target');
-    console.log(target)
-    $.scrollTo(target, 800, {easing:'swing'}); */
   }
 
 
@@ -500,9 +497,10 @@ function transFadeOut(o){
 
 function transitionOutComplete(o)
 {
-  //$('#transition-pane').hide();
+  
   targetToScrollTo = $('a[name$="'+dataDisplayed[1]+'"]');
-
-  if(targetToScrollTo.length == 1)
-    $.scrollTo(targetToScrollTo, 800, {easing:'swing'});
+  console.log('transitionOutComplete', targetToScrollTo);
+  
+  if(targetToScrollTo.length === 1)
+    $('.antiscroll-inner').scrollTo(targetToScrollTo, 800, {easing:'swing'});
 }

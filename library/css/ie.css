@@ -630,7 +630,7 @@ img.alignleft {
   text-decoration: none;
 }
 .index #home-offers .title-wrap {
-  height: 55px;
+  /*height:55px;*/
   display: table;
   width: 100%;
 }

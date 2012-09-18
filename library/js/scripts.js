@@ -63,7 +63,9 @@ var $mainwrapper = $('#main-wrapper'),
     $anchorsListMenu = $('#anchors-list');
   
 
-
+/**********************************************************************************************************
+READY
+***********************************************************************************************************/
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
     //on resize
@@ -73,19 +75,18 @@ jQuery(document).ready(function($) {
         viewport.width = $(window).width();
         viewport.height = $(window).height();
         viewport.firstResize = false;
-
-        console.log($("resize", '.antiscroll-inner'));
-
+       
         //JS scrollbar object update
         //antiscroll
+        $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
         scroller.refresh();
 
         refreshDisplay();
     });
 
-/*
-    nice scroll set up - Antiscroll.js
-    */   
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// ANTISCROLL
+////////////////////////////////////////////////////////////////////////////////////////////
     $(function () {
         $mainwrapper
         .wrap('<div id="box-antiscroll" class="box-wrap antiscroll-wrap" />')
@@ -95,13 +96,9 @@ jQuery(document).ready(function($) {
 
         
         $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
-        console.log("setup antiscroll", $('.antiscroll-inner'));
         scroller = $('#box-antiscroll').antiscroll().data('antiscroll');
 
-        // $(window).resize(function() {
-        //    
-        // });
-        
+        //LISTENER
         //refresh du scroll on content ajax load
         $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete+' '+customEvents.imagesLoadEventComplete, function(o) {
 
@@ -112,9 +109,14 @@ jQuery(document).ready(function($) {
         });
     });    
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// MENU LATERAL
+////////////////////////////////////////////////////////////////////////////////////////////
     var $rp = $('#right-pane');
     console.log("$rp:",$rp);
-
+/*
     $rp.hover(function()
     {
         console.log('mouseover!');
@@ -149,6 +151,7 @@ jQuery(document).ready(function($) {
         });
         
     })
+*/
     //hide the lateral bar on the first load
     $rp.animate({width:13}, {duration:300});
     
