@@ -156,7 +156,7 @@
 				    				</article>
 				    				<?php
 
-				    				$size = $sizes[rand(0, count($sizes))];
+				    				$size = $sizes[rand(0, count($sizes)-1)];
 
 				    			}
 
