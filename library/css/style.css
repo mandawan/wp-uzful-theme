@@ -1298,6 +1298,14 @@ ol#history li.hist-10 {
 /*********************
 NAVIGATION STYLES
 *********************/
+#vert-scrol-bg {
+  position: absolute;
+  background-color: red;
+  height: 100%;
+  right: 0;
+  width: 13px;
+  z-index: 4;
+}
 #right-navigation-container {
   position: fixed;
   float: right;
@@ -1315,13 +1323,6 @@ NAVIGATION STYLES
 #right-navigation-container.large {
   width: 380px;
 }
-#right-navigation-container #vert-scrol-bg {
-  position: absolute;
-  background-color: red;
-  height: 100%;
-  right: 0;
-  width: 13px;
-}
 #right-navigation-container .shadow {
   display: none;
   position: relative;
@@ -1337,7 +1338,7 @@ NAVIGATION STYLES
   height: 100%;
   float: left;
   width: 100%;
-  right: 13px;
+  right: 0px;
 }
 #right-anchor-nav-container nav#anchr-nav {
   height: 100%;

@@ -101,19 +101,20 @@ jQuery(document).ready(function($) {
 /////////////////////// MENU LATERAL
 ////////////////////////////////////////////////////////////////////////////////////////////
     var $rp = $('#right-navigation-container');
-    console.log("$rp:",$rp);
-
-    $rp.hover(function()
+    var $vsbg = $('#vert-scrol-bg, .antiscroll-scrollbar-vertical');
+    console.log('$vsbg:',$vsbg);
+    $vsbg.hover(function()
     {
         console.log('mouseover!');
         $rp.addClass('large');
         $rp.find('#right-anchor-nav-container').addClass('open');
-    },
-    function()
-    {
-        console.log('mouseout!');
-        $rp.removeClass('large');
-        $rp.find('#right-anchor-nav-container').removeClass('open');
+
+        $rp.one('mouseleave', function()
+        {
+            console.log('mouseout!');
+            $rp.removeClass('large');
+            $rp.find('#right-anchor-nav-container').removeClass('open');
+        });
     });
 
 

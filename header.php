@@ -56,6 +56,8 @@
 	<div id="main-wrapper" class="clearfix">
 		<div id="transition-pane"></div>
 
+		<div id="vert-scrol-bg"></div>
+		
 		<div id="right-navigation-container">
 			<div id="right-anchor-nav-container">
 				<nav id="anchor-nav">
@@ -65,7 +67,7 @@
 				</nav>
 				<div id="infos-uzful"></div>
 			</div> <!-- end right-anchor-nav-container -->
-			<div id="vert-scrol-bg"></div>
+			
 		</div> <!-- end right-anchor-nav-container-cointainer -->
 
 		<div id="container" class="full-page-container clearfix">
