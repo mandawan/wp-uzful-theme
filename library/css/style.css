@@ -537,6 +537,9 @@ Need help w/ choosing your colors? Try this site out:
 http://0to255.com/
 *********************/
 /*********************
+DIMENSIONS
+*********************/
+/*********************
 TYPOGRAPHY
 *********************/
 /* 	To embed your own fonts, use this syntax
@@ -659,7 +662,8 @@ CSS3 GRADIENTS
 Be careful with these since they can 
 really slow down your CSS. Don't overdue it.
 *********************/
-/* .css-gradient(#dfdfdf,#f8f8f8); */
+/* .vert-css-gradient(#dfdfdf,#f8f8f8); */
+/* .hor-css-gradient(#dfdfdf,#f8f8f8); */
 /*********************
 BOX SIZING
 *********************/
@@ -757,11 +761,11 @@ a.button-cta:visited span#plus {
 }
 a.button-more,
 a.button-more:visited {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 a.button-more.plus #plus,
 a.button-more:visited.plus #plus {
@@ -824,11 +828,11 @@ a.goto-more:visited:hover #plus {
   cursor: pointer;
   margin-bottom: 20px;
   line-height: 21px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -935,19 +939,26 @@ Stylesheet: AntiScroll jQuery plugin stylesheet
 }
 .antiscroll-scrollbar {
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  background: #ffffff;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 0 1px #fff;
+  /*-webkit-box-shadow: 0 0 1px #fff;
   -moz-box-shadow: 0 0 1px #fff;
-  box-shadow: 0 0 1px #fff;
+  box-shadow: 0 0 1px #fff;*/
+
   position: absolute;
   z-index: 5;
 }
 .antiscroll-scrollbar:hover,
 .antiscroll-scrollbar:active {
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.5);
 }
 .antiscroll-scrollbar-horizontal {
   height: 7px;
@@ -958,6 +969,7 @@ Stylesheet: AntiScroll jQuery plugin stylesheet
 }
 .antiscroll-scrollbar-vertical {
   width: 7px;
+  right: 3px;
   top: 0;
 }
 .antiscroll-inner {
@@ -1015,10 +1027,6 @@ input::-webkit-input-placeholder {
 }
 #container {
   background: white;
-}
-.antiscroll-scrollbar,
-#right-pane-container {
-  display: none;
 }
 /*********************
 LAYOUT & GRID STYLES
@@ -1112,11 +1120,11 @@ LINK STYLES
 a,
 a:visited {
   color: #00c6ff;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   text-decoration: none;
   cursor: pointer;
   /* on hover */
@@ -1290,33 +1298,58 @@ ol#history li.hist-10 {
 /*********************
 NAVIGATION STYLES
 *********************/
-#right-pane-container {
+#right-navigation-container {
   position: fixed;
   float: right;
   right: 0;
   top: 0;
   z-index: 1;
   height: 100%;
-  width: 350px;
+  width: 13px;
+  -webkit-transition: all 1.5s ease-in-out 0s;
+  -moz-transition: all 1.5s ease-in-out 0s;
+  -ms-transition: all 1.5s ease-in-out 0s;
+  -o-transition: all 1.5s ease-in-out 0s;
+  transition: all 1.5s ease-in-out 0s;
 }
-#right-pane {
+#right-navigation-container.large {
+  width: 380px;
+}
+#right-navigation-container #vert-scrol-bg {
   position: absolute;
+  background-color: red;
+  height: 100%;
+  right: 0;
+  width: 13px;
+}
+#right-navigation-container .shadow {
+  display: none;
+  position: relative;
+  bottom: 0;
+  float: left;
+  width: 60px;
+  height: 100%;
+  background: url(../images/right-nav-panel-bg.png) repeat-y top right;
+}
+#right-anchor-nav-container {
+  position: relative;
   background-color: #00c6ff;
   height: 100%;
-  width: 350px;
-  right: 0;
+  float: left;
+  width: 100%;
+  right: 13px;
 }
-#right-pane nav#anchr-nav {
+#right-anchor-nav-container nav#anchr-nav {
   height: 100%;
 }
-#right-pane ol#anchors-list {
+#right-anchor-nav-container ol#anchors-list {
   position: relative;
   z-index: 5;
   right: 0;
   height: 100%;
   margin: 10px 0;
 }
-#right-pane ol#anchors-list li {
+#right-anchor-nav-container ol#anchors-list li {
   display: block;
   text-align: right;
   background: transparent url('../images/scroll-bp.png') right center no-repeat;
@@ -1324,53 +1357,53 @@ NAVIGATION STYLES
   margin-left: 40%;
   padding: 10px 15px 10px 0;
 }
-#right-pane ol#anchors-list li a {
+#right-anchor-nav-container ol#anchors-list li a {
   font-size: 120%;
   color: rgba(255, 255, 255, 0.5);
   display: block;
   text-align: right;
 }
-#right-pane ol#anchors-list li a span {
+#right-anchor-nav-container ol#anchors-list li a span {
   display: block;
   text-align: right;
 }
-#right-pane ol#anchors-list li .a-title {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+#right-anchor-nav-container ol#anchors-list li .a-title {
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   font-size: 120%;
 }
-#right-pane ol#anchors-list li .a-sub {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+#right-anchor-nav-container ol#anchors-list li .a-sub {
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   color: #009ecc;
   display: none;
 }
-#right-pane ol#anchors-list li.selected .a-title {
+#right-anchor-nav-container ol#anchors-list li.selected .a-title {
   color: white;
 }
-#right-pane ol#anchors-list li.selected .a-sub {
+#right-anchor-nav-container ol#anchors-list li.selected .a-sub {
   display: block;
 }
-#right-pane ol#anchors-list li:hover .a-title {
+#right-anchor-nav-container ol#anchors-list li:hover .a-title {
   color: white;
   font-size: 160%;
 }
-#right-pane ol#anchors-list li:hover .a-sub {
+#right-anchor-nav-container ol#anchors-list li:hover .a-sub {
   display: block;
 }
-#right-pane ol#anchors-list li.history-page-but {
+#right-anchor-nav-container ol#anchors-list li.history-page-but {
   background-image: url(../images/arrow-bg.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-color: #00c6ff;
 }
-#right-pane #infos-uzful {
+#right-anchor-nav-container #infos-uzful {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1381,17 +1414,29 @@ NAVIGATION STYLES
   text-align: right;
   margin: 10px 0;
 }
-#right-pane:before {
+#right-anchor-nav-container.open:before {
+  -moz-box-shadow: 0 0 54px #555555;
+  -webkit-box-shadow: 0 0 54px #555555;
+  box-shadow: 0 0 54px #555555;
+}
+#right-anchor-nav-container:before {
   content: " ";
   position: absolute;
   z-index: -10;
   bottom: 0;
-  left: 0;
-  width: 10%;
+  left: 0px;
+  width: 60px;
   height: 100%;
-  -moz-box-shadow: 0 0 54px rgba(85, 85, 85, 0.6);
-  -webkit-box-shadow: 0 0 54px rgba(85, 85, 85, 0.6);
-  box-shadow: 0 0 54px rgba(85, 85, 85, 0.6);
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+  -moz-box-shadow: 0 0 54px rgba(85, 85, 85, 0);
+  -webkit-box-shadow: 0 0 54px rgba(85, 85, 85, 0);
+  box-shadow: 0 0 54px rgba(85, 85, 85, 0);
+  -webkit-transition: all 5s ease-in 1.5s;
+  -moz-transition: all 5s ease-in 1.5s;
+  -ms-transition: all 5s ease-in 1.5s;
+  -o-transition: all 5s ease-in 1.5s;
+  transition: all 5s ease-in 1.5s;
 }
 /*
 all navs have a .nav class applied via
@@ -2045,11 +2090,11 @@ FOOTER STYLES
 .footer #inner-footer #map-container #map {
   width: 98%;
   height: 280px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
   /* Firefox 3.5+ */
 
@@ -2100,11 +2145,11 @@ FOOTER STYLES
   cursor: pointer;
   background-position: center center;
   background-repeat: no-repeat;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 .footer #inner-footer #social-links ul li a#rss {
   background-image: url('../images/footer-rss.png');
@@ -2193,10 +2238,6 @@ tweeners.
   /*********************
   GENERAL STYLES
   *********************/
-  .antiscroll-scrollbar,
-  #right-pane-container {
-    display: block;
-  }
   /*********************
   LAYOUT & GRID STYLES
   *********************/

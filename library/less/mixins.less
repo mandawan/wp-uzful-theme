@@ -72,6 +72,15 @@ http://0to255.com/
 @bones-pink:        		#f01d4f;
 @bones-blue:        		#1990db;
 
+
+/*********************
+DIMENSIONS
+*********************/
+
+//@vert-scrollbar-width:			7px;
+
+
+
 /*********************
 TYPOGRAPHY
 *********************/
@@ -242,12 +251,12 @@ TRANISTION
 *********************/
 
 /* .transition(all,2s); */
-.transition(@what: all, @time: 0.2s, @transition: ease-in-out) {
-	-webkit-transition: @what @time @transition;
-	-moz-transition:    @what @time @transition;
-	-ms-transition:     @what @time @transition;
-	-o-transition:      @what @time @transition;
-	transition:         @what @time @transition;
+.transition(@what: all, @time: 0.2s, @transition: ease-in-out, @delay: 0s) {
+	-webkit-transition: @what @time @transition @delay;
+	-moz-transition:    @what @time @transition @delay;
+	-ms-transition:     @what @time @transition @delay;
+	-o-transition:      @what @time @transition @delay;
+	transition:         @what @time @transition @delay;
 }
 
 /*********************
@@ -256,8 +265,8 @@ Be careful with these since they can
 really slow down your CSS. Don't overdue it.
 *********************/
 
-/* .css-gradient(#dfdfdf,#f8f8f8); */
-.css-gradient(@from: #dfdfdf, @to: #f8f8f8) {
+/* .vert-css-gradient(#dfdfdf,#f8f8f8); */
+.vert-css-gradient(@from: #dfdfdf, @to: #f8f8f8) {
 	background-color: @to;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
 	background-image: -webkit-linear-gradient(top, @from, @to);
@@ -265,6 +274,17 @@ really slow down your CSS. Don't overdue it.
 	background-image: -o-linear-gradient(top, @from, @to);
 	background-image: linear-gradient(to bottom, @from, @to);
 }
+
+/* .hor-css-gradient(#dfdfdf,#f8f8f8); */
+.hor-css-gradient(@from: #ff0000, @to: #f8f8f8) {
+	background-color: @to;
+	background-image: -webkit-gradient(linear, left top, right top, from(@from), to(@to));
+	background-image: -webkit-linear-gradient(left, @from, @to);
+	background-image: -moz-linear-gradient(left, @from, @to);
+	background-image: -o-linear-gradient(left, @from, @to);
+	background-image: linear-gradient(to right, @from, @to);
+}
+
 
 /*********************
 BOX SIZING
@@ -467,34 +487,34 @@ a.goto-more, a.goto-more:visited {
 	line-height: 21px;
 	.transition();
 	.rounded(4px);
-	.css-gradient(@bones-pink,darken(@bones-pink, 5%));
+	.vert-css-gradient(@bones-pink,darken(@bones-pink, 5%));
 
 	&:hover, &:focus {
 		color: @white;
 	  	border: 1px solid darken(@bones-pink, 13%);
 	  	border-top-color: darken(@bones-pink, 20%);
 	 	border-left-color: darken(@bones-pink, 20%);
-		.css-gradient(darken(@bones-pink, 5%),darken(@bones-pink, 10%));
+		.vert-css-gradient(darken(@bones-pink, 5%),darken(@bones-pink, 10%));
 	}
 	
 	&:active {
-		.css-gradient(darken(@bones-pink, 5%),@bones-pink);
+		.vert-css-gradient(darken(@bones-pink, 5%),@bones-pink);
 	}	
 }
 
 .blue-button, .blue-button:visited {
 	border-color: darken(@bones-blue, 10%);
 	text-shadow: 0 1px 1px darken(@bones-blue, 10%);
-	.css-gradient( @bones-blue, darken(@bones-blue, 5%) );
+	.vert-css-gradient( @bones-blue, darken(@bones-blue, 5%) );
 	-webkit-box-shadow: inset 0 0 3px lighten(@bones-blue, 16%);
        -moz-box-shadow: inset 0 0 3px lighten(@bones-blue, 16%);
    	        box-shadow: inset 0 0 3px lighten(@bones-blue, 16%);
 	&:hover, &:focus {
 		border-color: darken(@bones-blue, 15%);
-		.css-gradient( darken(@bones-blue, 4%), darken(@bones-blue, 10%) );
+		.vert-css-gradient( darken(@bones-blue, 4%), darken(@bones-blue, 10%) );
 	}
 	&:active {
-		.css-gradient( darken(@bones-blue, 5%), @bones-blue );
+		.vert-css-gradient( darken(@bones-blue, 5%), @bones-blue );
 	}
 }
 

@@ -25,17 +25,19 @@ body {
 
 .antiscroll-scrollbar {
   cursor:pointer;
-  background: fade(white,50%);
+  .transition();
+  background: fade(white,100%);
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 0 1px #fff;
+  /*-webkit-box-shadow: 0 0 1px #fff;
   -moz-box-shadow: 0 0 1px #fff;
-  box-shadow: 0 0 1px #fff;
+  box-shadow: 0 0 1px #fff;*/
   position: absolute;
   z-index:5;
   &:hover, &:active {
     cursor:pointer;
+    background: fade(white,50%);
   }
 }
 
@@ -55,7 +57,7 @@ body {
 .antiscroll-scrollbar-vertical {
   width: 7px;
   //margin-top: 2px;
-  //right: 2px;
+  right: 3px;
   top: 0;
 }
 

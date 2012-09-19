@@ -273,7 +273,7 @@ function init_rel_offers(){
 
 function setup_rel_offers($post){
     wp_enqueue_script('jquery');
-    wp_enqueue_script( 'metas', get_stylesheet_directory_uri() . '/library/js/metas.js', array('myJquery'), '1', true);
+    wp_enqueue_script( 'metas', get_stylesheet_directory_uri() . '/library/js/metas.js', array('jquery'), '1', true);
     wp_enqueue_style( 'admin_styles',  get_stylesheet_directory_uri() . '/library/css/admin.css' );
     
     $cond = get_post_meta($post->ID,'_work_rel_offers',false);
@@ -345,7 +345,7 @@ function init_rel_ext(){
 
 function setup_rel_ext($post){
     //wp_enqueue_script('jquery');
-    wp_enqueue_script( 'metas', get_stylesheet_directory_uri() . '/library/js/metas.js', array('myJquery'));
+    wp_enqueue_script( 'metas', get_stylesheet_directory_uri() . '/library/js/metas.js', array('jquery'));
     
     $exts = get_post_meta($post->ID,'_work_rel_ext',false);
     $clients = get_post_meta($post->ID,'_work_rel_client',false);

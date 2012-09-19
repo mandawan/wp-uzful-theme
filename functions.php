@@ -102,18 +102,18 @@ function uzful_scripts_and_styles ()
         
 
     //TODO tout repasser en register + enqueue + tester de déplacer un max de trucs depuis bones.php vers ici.
-    wp_register_script( 'jquery-ui', get_stylesheet_directory_uri() . '/library/js/libs/jquery-ui.js', array('myJquery'), '', true );
-    wp_register_script( 'jquery-transit', get_stylesheet_directory_uri() . '/library/js/libs/jquery.transit.min.js', array('myJquery'), '', true );
-    wp_register_script( 'debounce', get_stylesheet_directory_uri() . '/library/js/libs/jquery.debounce.js', array('myJquery'), '', true );
+    wp_register_script( 'jquery-ui', get_stylesheet_directory_uri() . '/library/js/libs/jquery-ui.js', array('jquery'), '', true );
+    wp_register_script( 'jquery-transit', get_stylesheet_directory_uri() . '/library/js/libs/jquery.transit.min.js', array('jquery'), '', true );
+    wp_register_script( 'debounce', get_stylesheet_directory_uri() . '/library/js/libs/jquery.debounce.js', array('jquery'), '', true );
     wp_register_script( 'gmaps', 'http://maps.google.com/maps/api/js?sensor=false', '', true );
-    wp_register_script( 'jquery-waypoints', get_stylesheet_directory_uri() . '/library/js/libs/waypoints.min.js', array('myJquery'), '1.1.7', true );
+    wp_register_script( 'jquery-waypoints', get_stylesheet_directory_uri() . '/library/js/libs/waypoints.min.js', array('jquery'), '1.1.7', true );
 
     //AntiScroll Bar
-    wp_enqueue_script( 'mousewheel-script', get_stylesheet_directory_uri() . '/library/js/libs/jquery-mousewheel.js', array('myJquery'), '', true);
-    wp_enqueue_script( 'antiscroll-script', get_stylesheet_directory_uri() . '/library/js/libs/antiscroll.js', array('myJquery', 'mousewheel-script'), '', true);
+    wp_enqueue_script( 'mousewheel-script', get_stylesheet_directory_uri() . '/library/js/libs/jquery-mousewheel.js', array('jquery'), '', true);
+    wp_enqueue_script( 'antiscroll-script', get_stylesheet_directory_uri() . '/library/js/libs/antiscroll.js', array('jquery', 'mousewheel-script'), '', true);
     
     //Masonry
-    wp_enqueue_script( 'masonry-script', get_stylesheet_directory_uri() . '/library/js/libs/masonry.js', array('myJquery'), '2.1.05', true);
+    wp_enqueue_script( 'masonry-script', get_stylesheet_directory_uri() . '/library/js/libs/masonry.js', array('jquery'), '2.1.05', true);
     
     //imported by style.less @ the bottom of it
     wp_register_style( 'antiscroll-stylesheet', get_stylesheet_directory_uri() . '/library/css/antiscroll.css', array(), '', 'screen' );
@@ -121,13 +121,13 @@ function uzful_scripts_and_styles ()
 
 
     //For AJAXED theming
-    wp_enqueue_script( 'hashchange', get_stylesheet_directory_uri() . '/library/js/libs/jquery.ba-hashchange.min.js', array('myJquery'), '', true);
-    wp_enqueue_script( 'jquery-session', get_stylesheet_directory_uri() . '/library/js/libs/jquery.session.js', array('myJquery'), '', true);
-    wp_enqueue_script( 'jquery-cookie', get_stylesheet_directory_uri() . '/library/js/libs/jquery.cookie.js', array( 'myJquery' ), '', true);
+    wp_enqueue_script( 'hashchange', get_stylesheet_directory_uri() . '/library/js/libs/jquery.ba-hashchange.min.js', array('jquery'), '', true);
+    wp_enqueue_script( 'jquery-session', get_stylesheet_directory_uri() . '/library/js/libs/jquery.session.js', array('jquery'), '', true);
+    wp_enqueue_script( 'jquery-cookie', get_stylesheet_directory_uri() . '/library/js/libs/jquery.cookie.js', array( 'jquery' ), '', true);
 
-    wp_enqueue_script( 'scrollTo', get_stylesheet_directory_uri() . '/library/js/libs/jquery.scrollTo.js', array('myJquery'), '1.4.3.1', true);    
-    wp_enqueue_script( 'ajax-history', get_stylesheet_directory_uri() . '/library/js/myHistory.js', array( 'hashchange', 'myJquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit' ), '1.0', true);   
-    wp_enqueue_script( 'ajax-nav', get_stylesheet_directory_uri() . '/library/js/navigation.js', array( 'hashchange', 'myJquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit', 'ajax-history', 'jquery-waypoints' ), '1.0', true);   
+    wp_enqueue_script( 'scrollTo', get_stylesheet_directory_uri() . '/library/js/libs/jquery.scrollTo.js', array('jquery'), '1.4.3.1', true);    
+    wp_enqueue_script( 'ajax-history', get_stylesheet_directory_uri() . '/library/js/myHistory.js', array( 'hashchange', 'jquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit' ), '1.0', true);   
+    wp_enqueue_script( 'ajax-nav', get_stylesheet_directory_uri() . '/library/js/navigation.js', array( 'hashchange', 'jquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit', 'ajax-history', 'jquery-waypoints' ), '1.0', true);   
     wp_enqueue_script( 'gmaps');
     //
     

@@ -38,7 +38,7 @@ VARIABLES AND CONSTANTS
 ***********************************************************************************************************/
 
 
-var $mainwrapper = $('#main-wrapper'),
+var $mainwrapper = jQuery('#main-wrapper'),
     scroller,
     customEvents = {
         AJAXLoadEventComplete:      'AJAXLoadEventComplete',
@@ -50,8 +50,8 @@ var $mainwrapper = $('#main-wrapper'),
         contentFadeInComplete:      'contentFadeInComplete'
     }
     viewport = {
-        width:$(window).width(),
-        height:$(window).height(),
+        width:jQuery(window).width(),
+        height:jQuery(window).height(),
         firstResize:true
     },
     params = {
@@ -59,8 +59,8 @@ var $mainwrapper = $('#main-wrapper'),
         firstPage:true,
         rootURL:''
     }
-    $myEventDisatchObj = $(EventDispatcher.getInstance()),
-    $anchorsListMenu = $('#anchors-list');
+    $myEventDisatchObj = jQuery(EventDispatcher.getInstance()),
+    $anchorsListMenu = jQuery('#anchors-list');
   
 
 /**********************************************************************************************************
@@ -68,21 +68,7 @@ READY
 ***********************************************************************************************************/
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
-    //on resize
-    $(window).on('resize', function()
-    {
-        //VIEWPORT object update
-        viewport.width = $(window).width();
-        viewport.height = $(window).height();
-        viewport.firstResize = false;
-       
-        //JS scrollbar object update
-        //antiscroll
-        $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
-        scroller.refresh();
 
-        refreshDisplay();
-    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// ANTISCROLL
@@ -114,47 +100,27 @@ jQuery(document).ready(function($) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// MENU LATERAL
 ////////////////////////////////////////////////////////////////////////////////////////////
-    var $rp = $('#right-pane');
+    var $rp = $('#right-navigation-container');
     console.log("$rp:",$rp);
-/*
+
     $rp.hover(function()
     {
         console.log('mouseover!');
-        var span = $(this).children('a').children('div');
-        $rp.stop();
-        $rp.animate({
-                width:350
-            }, {
-                duration:300,
-                easing:'linear',
-                complete:function(){
-                    $anchorsListMenu.children('li').children('a').show(100);       
-                }   
-           
-         });
+        $rp.addClass('large');
+        $rp.find('#right-anchor-nav-container').addClass('open');
     },
     function()
     {
         console.log('mouseout!');
-        $rp.stop();
-        $anchorsListMenu.children('li').children('a').hide(100, function()
-        {
-            $rp.animate({
-                width:13
-                }, {    
-                duration:300,
-                easing:'swing'
-                }, {
-                complete:function(){
-                }
-            });
-        });
-        
-    })
-*/
-    //hide the lateral bar on the first load
-    $rp.animate({width:13}, {duration:300});
-    
+        $rp.removeClass('large');
+        $rp.find('#right-anchor-nav-container').removeClass('open');
+    });
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// CONTENT
+////////////////////////////////////////////////////////////////////////////////////////////
 
     //Home item-work loading & masonry
     var hw = $('#home-works');
@@ -170,11 +136,8 @@ jQuery(document).ready(function($) {
 
             hw.removeClass('loading');
 
-            
-            //console.log('image work loaded', iwloadedCount);
-
             var target = $(this);
-            console.log(target.width());
+
             //cosmeto wordings
             target.parent().parent().find('#work-title').css('width', target.width());
             target.parent().parent().find('#work-subtitle').css('width', target.width());
@@ -357,41 +320,24 @@ jQuery(document).ready(function($) {
   
 
 
-    /*
-    Responsive jQuery is a tricky thing.
-    There's a bunch of different ways to handle
-    it so, be sure to research and find the one
-    that works for you best.
-    */
-    
-    /* getting viewport width */
-    var responsive_viewport = viewport.width;
-    
-    /* if is below 481px */
-    if (responsive_viewport < 481) {
-    
-    } /* end smallest screen */
-    
-    /* if is larger than 481px */
-    if (responsive_viewport > 481) {
-        
-    } /* end larger than 481px */
-    
-    /* if is above or equal to 768px */
-    if (responsive_viewport >= 768) {
-    
-        /* load gravatars */
-        $('.comment img[data-gravatar]').each(function(){
-            $(this).attr('src',$(this).attr('data-gravatar'));
-        });
-        
-    }
-    
-    /* off the bat large screen actions */
-    if (responsive_viewport > 1030) {
-        
-    }
 
+        //on resize
+    $(window).on('resize', function()
+    {
+        //VIEWPORT object update
+        viewport.width = $(window).width();
+        viewport.height = $(window).height();
+        viewport.firstResize = false;
+       
+        //JS scrollbar object update
+        //antiscroll
+        $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
+        if(scroller) scroller.refresh();
+
+        refreshDisplay();
+
+        responsiveRoutine();
+    }).trigger('resize'); // we make a resize onready
 
     //OK TOUT EST FINI
     params.firstLoad = false;
@@ -400,6 +346,58 @@ jQuery(document).ready(function($) {
      
 }); /* end of as page load scripts */
 
+
+function responsiveRoutine()
+{
+    /*
+    Responsive jQuery is a tricky thing.
+    There's a bunch of different ways to handle
+    it so, be sure to research and find the one
+    that works for you best.
+    */
+    
+    /* getting viewport width */
+    var responsive_viewport = viewport;
+    
+    console.log("responsiveRoutine", responsive_viewport);
+
+    /* if is below  or equal tp 768px */
+    if (responsive_viewport.width <= 768) {
+        
+        $('#right-navigation-container').hide();
+
+    }
+
+
+    /* if is below 481px */
+    if (responsive_viewport.width < 481) {
+    
+    } /* end smallest screen */
+    
+    /* if is larger than 481px */
+    if (responsive_viewport.width > 481) {
+        
+    } /* end larger than 481px */
+    
+
+
+    /* if is above 768px */
+    if (responsive_viewport.width > 768) {
+        $('#right-navigation-container').show();
+        /* load gravatars */
+        $('.comment img[data-gravatar]').each(function(){
+            $(this).attr('src',$(this).attr('data-gravatar'));
+        });
+        
+    }
+    
+    /* off the bat large screen actions */
+    if (responsive_viewport.width > 1030) {
+        
+    }
+
+    console.log('#right-navigation-container', $('#right-navigation-container').css('display'));
+}
 
 
 // IE8 ployfill for GetComputed Style (for Responsive Script below)

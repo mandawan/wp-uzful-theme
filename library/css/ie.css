@@ -65,6 +65,9 @@ Need help w/ choosing your colors? Try this site out:
 http://0to255.com/
 *********************/
 /*********************
+DIMENSIONS
+*********************/
+/*********************
 TYPOGRAPHY
 *********************/
 /* 	To embed your own fonts, use this syntax
@@ -187,7 +190,8 @@ CSS3 GRADIENTS
 Be careful with these since they can 
 really slow down your CSS. Don't overdue it.
 *********************/
-/* .css-gradient(#dfdfdf,#f8f8f8); */
+/* .vert-css-gradient(#dfdfdf,#f8f8f8); */
+/* .hor-css-gradient(#dfdfdf,#f8f8f8); */
 /*********************
 BOX SIZING
 *********************/
@@ -285,11 +289,11 @@ a.button-cta:visited span#plus {
 }
 a.button-more,
 a.button-more:visited {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 a.button-more.plus #plus,
 a.button-more:visited.plus #plus {
@@ -352,11 +356,11 @@ a.goto-more:visited:hover #plus {
   cursor: pointer;
   margin-bottom: 20px;
   line-height: 21px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -464,10 +468,6 @@ upon your base.scss styles.
 /*********************
 GENERAL STYLES
 *********************/
-.antiscroll-scrollbar,
-#right-pane-container {
-  display: block;
-}
 /*********************
 LAYOUT & GRID STYLES
 *********************/
