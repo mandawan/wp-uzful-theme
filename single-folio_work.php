@@ -87,7 +87,8 @@ single-bookmarks.php
 							    if($employee_ids)
 							    {
 									$args1 = array(
-										'include' => $employee_ids
+										'include' => $employee_ids,
+										'role=employee'
 										);
 
 								    
@@ -179,7 +180,7 @@ single-bookmarks.php
 
 									    	//TODO:ici c'est tout buggé
 									    	if (isset($employees)) {
-									    		var_dump($employee_ids);
+									    		//var_dump($employee_ids);
 									    		$first = true;
 								    			foreach ($employees as $employee) {
 								    				//echo $employee->ID.',';
@@ -198,7 +199,7 @@ single-bookmarks.php
 						    			<?php
 
 						    				if (isset($partners)) {
-						    					var_dump($partners_ids);
+						    					//var_dump($partners_ids);
 									    		//var_dump($offers_query);
 									    		$first = true;
 								    			foreach ($partners as $partner) {

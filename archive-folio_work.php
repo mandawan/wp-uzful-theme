@@ -6,7 +6,15 @@ Template Name: works index
 
 <?php get_header(); 
 
-$the_query = new WP_Query("post_type=folio_work&post_status=publish&posts_per_page=25");
+$type = 'folio_work';
+$args=array(
+  'post_type' => $type,
+  'post_status' => 'publish',
+  'posts_per_page' => -1,
+  'caller_get_posts'=> 1
+);
+$the_query = null;
+$the_query = new WP_Query($args);
 ?>
 		
 				<div id="inner-header" class="wrap clearfix">
@@ -70,7 +78,7 @@ $the_query = new WP_Query("post_type=folio_work&post_status=publish&posts_per_pa
 						    ?>
 						<a id="anchor-<?php the_ID(); ?>" name="<?php echo $post->post_name; ?>" data-title="<?php echo $post->post_title; ?>" data-sub="<?php echo $subtitle; ?>" class="anchor"></a>	
 						<div data-fullcontent="<?php the_permalink(); ?>" rel="post-<?php the_ID(); ?>"></div>
-					    <section id="sum-post-<?php the_ID(); ?>" <?php post_class('clearfix heightcol first'); ?> role="article">
+					    <article id="sum-post-<?php the_ID(); ?>" <?php post_class('clearfix heightcol first'); ?> role="article">
 
 						    <div class="head-wrapper sixcol first">
 							    <div class="alignleft" ><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail('uzful-thumb-180'); ?></a></div>
@@ -123,7 +131,7 @@ $the_query = new WP_Query("post_type=folio_work&post_status=publish&posts_per_pa
 						    
 						    <?php // comments_template(); // uncomment if you want to use them ?>
 					
-					    </section> <!-- end article -->
+					    </article> <!-- end article -->
 					
 					    <?php endwhile; ?>	
 					

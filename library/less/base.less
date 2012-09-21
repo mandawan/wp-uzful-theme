@@ -53,7 +53,8 @@ LAYOUT & GRID STYLES
 	.onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol, .twelvecol { 
 		position: relative;
 		float: left; 
-		margin-left: 2.75%;
+		//margin-left: 2.75%;
+		margin-left: 2.024291497976%;
 		//border:solid 1px green;
 	}
 	
@@ -118,7 +119,7 @@ LAYOUT & GRID STYLES
 }
 
 .wrap {
-	width: 90%;
+	//width: 90%;
 	margin: 0;
 	margin-left: 20px; 
 }
@@ -430,7 +431,7 @@ z-index: 4;
 		width: 100%;
 		height: 250px;
 		text-align:right;
-		margin:10px 0;
+		margin:10px 0 0 0;
 	}
 
 	&.open:before {
@@ -764,17 +765,13 @@ POSTS & CONTENT STYLES
 			}
 		}
 
-		/* folio blocks */
+		/* folio works */
 
 		.type-folio_work {
 			time, .client-name {
 				//color: @main-theme-color;
 				text-transform: capitalize;
 			}
-		
-		}
-
-		.folio_work {
 
 			.results {
 				.highlight();
@@ -790,6 +787,7 @@ POSTS & CONTENT STYLES
 			}
 			
 		}
+
 
 		/* index */
 		p#logo {

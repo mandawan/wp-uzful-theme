@@ -631,9 +631,13 @@ span.amp {
 }
 .black {
   color: black;
+  height: 400px;
+  background-color: grey;
 }
 .white {
-  color: white;
+  color: black;
+  height: 400px;
+  background-color: #fafafa;
 }
 /*********************
 BORDER RADIUS
@@ -1046,7 +1050,7 @@ LAYOUT & GRID STYLES
 .twelvecol {
   position: relative;
   float: left;
-  margin-left: 2.75%;
+  margin-left: 2.024291497976%;
 }
 .first {
   margin-left: 0;
@@ -1102,7 +1106,6 @@ LAYOUT & GRID STYLES
 
 }
 .wrap {
-  width: 90%;
   margin: 0;
   margin-left: 20px;
 }
@@ -1413,7 +1416,7 @@ NAVIGATION STYLES
   width: 100%;
   height: 250px;
   text-align: right;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
 }
 #right-anchor-nav-container.open:before {
   -moz-box-shadow: 0 0 54px #555555;
@@ -1660,21 +1663,21 @@ POSTS & CONTENT STYLES
   text-align: center;
   vertical-align: middle;
 }
-/* folio blocks */
+/* folio works */
 .type-folio_work time,
 .type-folio_work .client-name {
   text-transform: capitalize;
 }
-.folio_work .results {
+.type-folio_work .results {
   background: #00c6ff;
   color: white;
   padding: 2em;
   padding: 0.7em;
 }
-.folio_work .results * {
+.type-folio_work .results * {
   color: white;
 }
-.folio_work #links {
+.type-folio_work #links {
   border: solid 1px;
 }
 /* index */
@@ -2246,15 +2249,15 @@ tweeners.
   		This is a combination composed 1024px 8 cols grid based on Creaktif PSDs Grid.
   	*/
   .onecol {
-    width: 10.09375%;
+    width: 10.728744939271%;
   }
   /* grid_1  */
   .twocol {
-    width: 22.9375%;
+    width: 23.481781376518%;
   }
   /* grid_2  */
   .threecol {
-    width: 35.78125%;
+    width: 36.234817813765%;
   }
   /* grid_3  */
   .fourcol,
@@ -2429,11 +2432,11 @@ tweeners.
   }
   /* end spécialindex */
   /* SPECIAL FOLIO WORKS */
-  section.type-folio_work {
+  .type-folio_work {
     display: block;
     padding: 48px 0;
   }
-  section.type-folio_work .offers a {
+  .type-folio_work .offers a {
     max-width: 75px;
     margin-right: 0.3em;
     display: inline;
@@ -2441,24 +2444,24 @@ tweeners.
     margin-left: 0;
     margin-right: 10px;
   }
-  section.type-folio_work .offers a img {
+  .type-folio_work .offers a img {
     margin-bottom: 0;
   }
-  section.type-folio_work .chapeau {
+  .type-folio_work .chapeau {
     width: 72.29375%;
   }
-  section.type-folio_work .chapeau h2 {
+  .type-folio_work .chapeau h2 {
     margin-top: -0.2em;
     margin-bottom: 5px;
   }
-  section.type-folio_work .chapeau h2 .small {
+  .type-folio_work .chapeau h2 .small {
     font-size: 60%;
     line-height: 0.5em;
   }
-  section.type-folio_work .chapeau h2 p {
+  .type-folio_work .chapeau p {
     margin: 0;
   }
-  section.type-folio_work #ressources img {
+  .type-folio_work #ressources img {
     margin-bottom: 0;
   }
   /* end .type-folio_work */
@@ -2517,37 +2520,40 @@ you can add resource intensive styles.
   		This is a combination composed 1024px 8 cols grid based on Creaktif PSDs Grid.
   	*/
   .onecol {
-    width: 10.09375%;
+    width: 10.728744939271%;
   }
   /* grid_1  */
   .twocol {
-    width: 22.9375%;
+    width: 23.481781376518%;
   }
   /* grid_2  */
   .threecol {
-    width: 35.78125%;
+    width: 36.234817813765%;
   }
   /* grid_3  */
   .fourcol {
-    width: 48.625%;
+    width: 48.987854251012%;
   }
   /* grid_4  */
   .fivecol {
-    width: 61.46875%;
+    width: 61.740890688259%;
   }
   /* grid_5  */
   .sixcol {
-    width: 74.3125%;
+    width: 74.493927125506%;
   }
   /* grid_6  */
   .sevencol {
-    width: 87.15625%;
+    width: 87.246963562753%;
   }
   /* grid_7  */
   .eightcol {
     width: 100%;
   }
   /* grid_8  */
+  .first {
+    margin-left: 0;
+  }
   .onecol,
   .twocol,
   .threecol,
@@ -2555,13 +2561,12 @@ you can add resource intensive styles.
   .fivecol,
   .sixcol,
   .sevencol,
-  .eightcol {
-    position: relative;
-    float: left;
-    margin-left: 2.75%;
-  }
-  .first {
-    margin-left: 0;
+  .eightcol,
+  .ninecol,
+  .tencol,
+  .elevencol,
+  .twelvecol {
+    margin-left: 2.024291497976%;
   }
   /*********************
   GENERAL STYLES
@@ -2606,7 +2611,7 @@ you can add resource intensive styles.
   LAYOUT & GRID STYLES
   *********************/
   .wrap {
-    max-width: 983px;
+    max-width: 988px;
   }
   /*********************
   HEADER SYTLES

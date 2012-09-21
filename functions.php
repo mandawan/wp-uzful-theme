@@ -64,12 +64,13 @@ require_once('library/translation/translation.php'); // this comes turned off by
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
-add_image_size( 'uzful-thumb-700', 730, 330, false );
-add_image_size( 'uzful-thumb-180', 180, 100, false );
+add_image_size( 'uzful-thumb-700', 730, 400, true );
 add_image_size( 'uzful-thumb-480', 480, 300, false );
 add_image_size( 'uzful-thumb-355', 355, 240, false );
-add_image_size( 'uzful-thumb-230', 230, 200, false );
-add_image_size( 'uzful-thumb-55', 55, 55, false );
+add_image_size( 'uzful-thumb-230', 230, 9999, false );
+add_image_size( 'uzful-thumb-180', 180, 100, false );
+add_image_size( 'uzful-thumb-72', 72, 72, true );
+add_image_size( 'uzful-thumb-55', 55, 55, true );
 /* 
 to add more sizes, simply copy a line from above 
 and change the dimensions & name. As long as you
