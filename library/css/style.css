@@ -1300,7 +1300,7 @@ NAVIGATION STYLES
 *********************/
 #vert-scrol-bg {
   position: absolute;
-  background-color: red;
+  background-color: #00c6ff;
   height: 100%;
   right: 0;
   width: 13px;

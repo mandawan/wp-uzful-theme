@@ -77,8 +77,7 @@ function constructanchorsListMenu(o)
       if(direction)
         console.log(direction);
 
-      
-
+      //anims CSS3
       $anchors.each(function()
       {
         $(this).data('button').removeClass('selected');

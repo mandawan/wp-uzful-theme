@@ -46,7 +46,7 @@ function custom_extention() {
 			'menu_position' => 7, /* this is what order you want it to appear in on the left hand side menu */ 
 			'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
 			'rewrite'	=> array( 'slug' => 'extensions', 'with_front' => false ), /* you can specify it's url slug */
-			'has_archive' => 'extensioss', /* you can rename the slug here */
+			'has_archive' => 'extensions', /* you can rename the slug here */
 			'capability_type' => 'post',
             'capabilities' => array(
                 'publish_posts' => 'publish_extentions',

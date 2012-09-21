@@ -232,6 +232,7 @@ add_filter('the_permalink', 'ajaxed_links');
 add_filter('tag_link ', 'ajaxed_links');
 add_filter('category_link', 'ajaxed_links');
 add_filter('page_link', 'ajaxed_links');
+add_filter('post_type_archive_link', 'ajaxed_links');
 
 // Regex based links transformation function
 function ajaxed_links($fullLink){

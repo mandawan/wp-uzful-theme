@@ -97,27 +97,6 @@ jQuery(document).ready(function($) {
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// MENU LATERAL
-////////////////////////////////////////////////////////////////////////////////////////////
-    var $rp = $('#right-navigation-container');
-    var $vsbg = $('#vert-scrol-bg, .antiscroll-scrollbar-vertical');
-    console.log('$vsbg:',$vsbg);
-    $vsbg.hover(function()
-    {
-        console.log('mouseover!');
-        $rp.addClass('large');
-        $rp.find('#right-anchor-nav-container').addClass('open');
-
-        $rp.one('mouseleave', function()
-        {
-            console.log('mouseout!');
-            $rp.removeClass('large');
-            $rp.find('#right-anchor-nav-container').removeClass('open');
-        });
-    });
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// CONTENT
@@ -145,7 +124,7 @@ jQuery(document).ready(function($) {
             
             target.show();
 
-            $(hw).find('.masonry').masonry({ itemSelector: '.item-work', gutterWidth: 25, columnWidth: function( containerWidth ) { return (containerWidth-189) / 8; }});
+            
 
 
             $myEventDisatchObj.trigger(customEvents.imagesLoadEventComplete);
@@ -154,7 +133,7 @@ jQuery(document).ready(function($) {
             {
                 //console.log('all images work loaded -> show section');
                 
-                
+                $(hw).find('.masonry').masonry({ itemSelector: '.item-work', gutterWidth: 25, columnWidth: function( containerWidth ) { return (containerWidth-189) / 8; }});    
                
                 firstLoad = false;
                 var iwShownCount = 0;
@@ -181,37 +160,19 @@ jQuery(document).ready(function($) {
 
 
     
-    //Google maps (footer)
-    var $map = $('#map');
-    console.log($map);
-    if($map.length)
-    {
-        initialiserMap($map.attr('id'));
-    }
-    function  initialiserMap(id){
-        console.log("init map");
-           
-        var mapOptions = {
-            zoom: 16,
-            center: new google.maps.LatLng(48.855034, 2.422319),
-            disableDefaultUI: true,
-            panControl: false,
-            zoomControl: true,
-            scaleControl: false,
-            //styles:styles,
-            MapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// GMAPS
+////////////////////////////////////////////////////////////////////////////////////////////
+var $map = $('#map');
+console.log($map);
+if($map.length)
+{
+    initialiserMap($map.attr('id'));
+}
         
-        
-        var map = new google.maps.Map(document.getElementById(id),
-            mapOptions);
-        
-        var markerUzful = new google.maps.Marker({clickable:false, map:map, position:new google.maps.LatLng(48.85385,2.421933), draggable:false});
-
-    }
-
-    
-    //Button-more (load more content panel AJAX)
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// BUTTONS
+////////////////////////////////////////////////////////////////////////////////////////////
     var bm = $('a.button-more');
     if(bm.length)
     {
@@ -297,6 +258,11 @@ jQuery(document).ready(function($) {
     });
 	*/
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// INIT
+////////////////////////////////////////////////////////////////////////////////////////////
+
     //listen to hashchange and act so..
     initNavListeners();
     //anchors nav on scrollbar
@@ -306,7 +272,9 @@ jQuery(document).ready(function($) {
     
 
 
-    //hash change
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// HASHCHANGE
+////////////////////////////////////////////////////////////////////////////////////////////
     $(window).hashchange( function(){
         
         //requete navigation
@@ -322,7 +290,9 @@ jQuery(document).ready(function($) {
 
 
 
-        //on resize
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// RESIZE
+////////////////////////////////////////////////////////////////////////////////////////////
     $(window).on('resize', function()
     {
         //VIEWPORT object update
@@ -340,13 +310,116 @@ jQuery(document).ready(function($) {
         responsiveRoutine();
     }).trigger('resize'); // we make a resize onready
 
-    //OK TOUT EST FINI
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//OK TOUT EST FINI
+
     params.firstLoad = false;
 
     
      
 }); /* end of as page load scripts */
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// MENU LATERAL
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function activateRightMenuInteract(){
+    console.log('activateRightMenuInteract');
+
+    //ANIMS CSS3
+    //TODO tout passer en animelt ou transition au lieu des classes ??
+    var func = function()
+    {
+        var $rp = $('#right-navigation-container');
+
+        // si le menu est ouvert, on le referme (c'esst qu'il était ouvert en grand sur un grand écran #RESPONSIVE)
+
+        
+        $rp.addClass('large')
+            .find('#right-anchor-nav-container').addClass('open')
+            .one('mouseleave', out).data('mouseleave', out);
+        
+        $('body').one('mouseleave', out).data('mouseleave', out);
+
+        $(window).one('mouseleave', out).data('mouseleave', out);
+
+        function out()
+        {
+            if(!$rp.data('active')) return;
+            $rp.removeClass('large')
+                .find('#right-anchor-nav-container').removeClass('open')
+                .off('mouseleave', out);
+
+            $('body').off('mouseleave', out);
+
+            $(window).off('mouseleave', out);
+
+        }
+    }
+    $('#vert-scrol-bg, .antiscroll-scrollbar-vertical').on('mouseenter', func).data('mousenter', func);
+    $('#right-navigation-container').data('active', true);
+
+    if($('#right-navigation-container').hasClass('large'))
+    {
+        console.log($('#right-navigation-container'));
+        $('#vert-scrol-bg, .antiscroll-scrollbar-vertical').trigger('mouseenter');
+    }
+    
+}
+
+function fixOpenedRightMenu(){
+    console.log('fixOpenedRightMenu');
+
+    //ANIMS CSS3
+    var $rp = $('#right-navigation-container');
+
+    $rp.data('active', false);
+
+    console.log($('#vert-scrol-bg, .antiscroll-scrollbar-vertical').data('mousenter'));
+    console.log($('#vert-scrol-bg, .antiscroll-scrollbar-vertical').data('mousenter'));
+    console.log($('#right-navigation-container').data('mouseleave'));
+    console.log($rp.data('active'));
+
+    if(!$rp.hasClass('large'))
+        $rp.addClass('large')
+            .find('#right-anchor-nav-container').addClass('open')
+
+    $rp.off('mouseleave', $(this).data('mouseleave')).data('mouseleave', false);
+
+    if($rp.data('active'))
+    {
+        $('body').off('mouseleave',$('body').data('mouseleave')).data('mouseleave', false);
+        $(window).off('mouseleave',$('window').data('mouseleave')).data('mouseleave', false);
+
+        $('#vert-scrol-bg, .antiscroll-scrollbar-vertical').off('mouseenter', $('#vert-scrol-bg, .antiscroll-scrollbar-vertical').data('mouseenter')).data('mouseenter', false);
+    }
+
+
+}
+
+function initialiserMap(id){
+    console.log("init map");
+       
+    var mapOptions = {
+        zoom: 16,
+        center: new google.maps.LatLng(48.855034, 2.422319),
+        disableDefaultUI: true,
+        panControl: false,
+        zoomControl: true,
+        scaleControl: false,
+        //styles:styles,
+        MapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    
+    var map = new google.maps.Map(document.getElementById(id),
+        mapOptions);
+    
+    var markerUzful = new google.maps.Marker({clickable:false, map:map, position:new google.maps.LatLng(48.85385,2.421933), draggable:false});
+
+}
 
 function responsiveRoutine()
 {
@@ -360,11 +433,11 @@ function responsiveRoutine()
     /* getting viewport width */
     var responsive_viewport = viewport;
     
-    console.log("responsiveRoutine", responsive_viewport);
+    //console.log("responsiveRoutine", responsive_viewport);
 
     /* if is below  or equal tp 768px */
     if (responsive_viewport.width <= 768) {
-        
+        //on cache la barre de droite
         $('#right-navigation-container').hide();
 
     }
@@ -384,20 +457,39 @@ function responsiveRoutine()
 
     /* if is above 768px */
     if (responsive_viewport.width > 768) {
-        $('#right-navigation-container').show();
+       
         /* load gravatars */
         $('.comment img[data-gravatar]').each(function(){
             $(this).attr('src',$(this).attr('data-gravatar'));
         });
         
+        //on montre la barre de droite
+        $('#right-navigation-container').show();
+        // on rend la barre de droite interactive
+            
+        //on fixe la bare de droite tjs visible
+        //console.log(!$('#right-navigation-container').data('active'));
+
+        if(responsive_viewport.width > 1450)     
+        {
+            if($('#right-navigation-container')!=false)
+                fixOpenedRightMenu();   
+        }
+        // si le menu n'est aps encore actif, on l'active
+        else 
+            if(!$('#right-navigation-container').data('active'))
+                activateRightMenuInteract();
     }
     
     /* off the bat large screen actions */
     if (responsive_viewport.width > 1030) {
-        
+
     }
 
-    console.log('#right-navigation-container', $('#right-navigation-container').css('display'));
+    if (responsive_viewport.width > 1240) {
+        
+    }
+    
 }
 
 

@@ -64,8 +64,6 @@
 								    );
 
 			$extensions_query = new WP_Query($args);
-
-
 			?>
 
 			<div id="content">
@@ -125,7 +123,7 @@
 							<div class="more eightcol clearfix first">
 								<a class="button-more button-cta plus" rel="content-more"><span id="text">Une offre pour tous</span><span id="plus"></span></a>
 								<div class="content-more">
-									<p>La socialisation de l'écosystème digital permet aujourd'hui à toutes les entreprises d'y développer leur business, quelle que soit leur taille. Désormais le budget n'est plus la recette du succès... le savoir-faire, les ressources internes et la capacité d'innovation font la loi ! Allant de la formation ponctuelle à l'externalisation partielle ou totale, l'offre Uzful permet à tous de rester dans la course.<a class="goto-more button-cta clearfix plus" rel="" href="<?php bloginfo('siteurl'); ?>/offers/"><span id="text">Nos offres en détail</span><span id="plus"></span></a></p>						
+									<p>La socialisation de l'écosystème digital permet aujourd'hui à toutes les entreprises d'y développer leur business, quelle que soit leur taille. Désormais le budget n'est plus la recette du succès... le savoir-faire, les ressources internes et la capacité d'innovation font la loi ! Allant de la formation ponctuelle à l'externalisation partielle ou totale, l'offre Uzful permet à tous de rester dans la course.<a class="goto-more button-cta clearfix plus" rel="" href="<?php echo get_post_type_archive_link('offer'); ?>"><span id="text">Nos offres en détail</span><span id="plus"></span></a></p>						
 								</div>
 							</div>
 
@@ -138,7 +136,7 @@
 				    		if (isset($works_query) && $works_query->have_posts()) {
 
 					    		//var_dump($offers_query);
-					    		$sizes = array('355', '230', '180');
+					    		$sizes = array('355', '230');
 					    		$size = $sizes[0];
 				    			while ($works_query->have_posts()) {
 
@@ -166,7 +164,7 @@
 							}
 							?>				    		
 				    		</div>
-				    		<a class="button-more button-cta plus" href="<?php bloginfo('siteurl'); ?>/works/"><span id="text">Voir toutes les réalisations</span><span id="plus"></span></a>
+				    		<a class="button-more button-cta plus" href="<?php echo get_post_type_archive_link('folio_work'); ?>"><span id="text">Voir toutes les réalisations</span><span id="plus"></span></a>
 				    	</section> <!-- end home-works -->
 
 						<section id="home-extensions" class="eightcol first clearfix">
@@ -208,7 +206,7 @@
 							<div class="more eightcol clearfix first">
 								<a class="button-more button-cta plus" rel="content-more"><span id="text">En savoir plus sur notre démarche</span><span id="plus"></span></a>
 								<div class="content-more">
-									<p>Plus qu’une agence, Uzful est une structure hybride qui ne se contente pas d’accompagner les idées des autres… Pour être toujours au top de la créativité, elle s'associe au développement de projets innovants et met ses expertises à leur service !<a class="goto-more button-cta clearfix plus" rel="" href="<?php bloginfo('siteurl'); ?>/extensions/"><span id="text">Plus de détails sur nos extensions</span><span id="plus"></span></a></p>						
+									<p>Plus qu’une agence, Uzful est une structure hybride qui ne se contente pas d’accompagner les idées des autres… Pour être toujours au top de la créativité, elle s'associe au développement de projets innovants et met ses expertises à leur service !<a class="goto-more button-cta clearfix plus" rel="" href="<?php echo get_post_type_archive_link('extension'); ?>"><span id="text">Plus de détails sur nos extensions</span><span id="plus"></span></a></p>						
 								</div>
 							</div>
 				    	</section> <!-- end home-extensions -->				    	
