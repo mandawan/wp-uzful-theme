@@ -27,29 +27,33 @@
 					
 					<div id="address" class="onecol first">
 						<div class="vcard"> <!-- appel au format hCard -->
-							<h3 class="white">On est là</h3>
-							<ul class="adr"> <!-- propriété globale d’adresse hCard -->
-								<li class="fn org name">Uzful</li>
-								<li class="title" style="display:none;">Agence utile</li>
-								<li class="street-address">48-50, rue voltaire</li>
-								<li><span class="postal-code">93100</span><span>, </span><span class="locality">Montreuil</span>
-									<span class="country-name" style="text-transform: uppercase;">France</span>
-								</li>
-							</ul>
-							
-							<h3 class="white clearfix">Keep in touch</h3>
-							<div class="p">
-								<div><div class='image-replacement ico-tel first'>Tél. </div><span class="tel">+33 1 47 85 21 47</span> <!-- classe hCard de téléphone --></div>
-								<div><div class="image-replacement ico-email">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('contact@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('contact@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail --></div>
+							<div class="fleft column">
+								<h3 class="white">On est là</h3>
+								<ul class="adr"> <!-- propriété globale d’adresse hCard -->
+									<li class="fn org name">Uzful</li>
+									<li class="title" style="display:none;">Agence utile</li>
+									<li class="street-address">48-50, rue voltaire</li>
+									<li><span class="postal-code">93100</span><span>, </span><span class="locality">Montreuil</span>
+										<span class="country-name" style="text-transform: uppercase;">France</span>
+									</li>
+								</ul>
 							</div>
-
-							<h3 class="white">Uzful jobs</h3>
-							<div class="p">
-								<div class="image-replacement ico-email first">Email : </div><a class="email alignleft fleft" href"mailto:<?php echo obfuscate_email('job@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('job@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail -->
+							<div class="fleft column">
+								<h3 class="white clearfix">Keep in touch</h3>
+								<div class="p">
+									<div><div class='image-replacement ico-tel first'>Tél. </div><span class="tel">+33 1 47 85 21 47</span> <!-- classe hCard de téléphone --></div>
+									<div><div class="image-replacement ico-email">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('contact@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('contact@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail --></div>
+								</div>
+							</div>
+							<div class="fleft column">
+								<h3 class="white">Uzful jobs</h3>
+								<div class="p">
+									<div class="image-replacement ico-email first">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('job@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('job@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail -->
+								</div>
 							</div>
 						</div> <!-- end .vcard -->
 					</div> <!-- end address -->
-					<div id="social-links" class="onecol">
+					<div id="social-links"> <!-- grid code class in CSS --> 
 						<ul class="clearfix">
 							<li class="social url"> <!-- classes hCard de type social et de lien -->
 								<a id="rss" class="first" href="http://uzful.fr/rss">Flux Rss</a>
@@ -119,6 +123,8 @@
 		</script>
 		<!-- Twitter -->
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		<!-- Pinterest -->		
+		<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>		
 		<!-- NOSCRIPT -->
 		<noscript>//nothing needeed</noscript>
 

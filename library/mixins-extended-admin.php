@@ -193,7 +193,7 @@ function setup_rel_partners($post){
         //$user->user_email
         //$user->user_nicename
         //$user->ID
-        echo '      <li><label><input type="checkbox" name="cond[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
+        echo '      <li><label><input type="checkbox" name="partners[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
     }
 
     echo '  </ul>';
@@ -231,7 +231,7 @@ function save_rel_partners($post_id){
         // je supprime toutes les entrées pour cette meta
         delete_post_meta($post_id, 'rel_partners');
         // et pour chaque conditionnement coché, j'ajoute une metadonnée
-        foreach($_POST['cond'] as $c){
+        foreach($_POST['partners'] as $c){
             add_post_meta($post_id, 'rel_partners', intval($c) );
         }
     }

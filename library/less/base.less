@@ -33,6 +33,13 @@ input::-webkit-input-placeholder {
 	color:white;
 }
 
+hr {
+	height: 0;
+	border-top: solid 1px @main-theme-color-dark;
+	border-bottom: solid 1px @main-theme-color-light;
+	width : 100%;
+}
+
 ::-moz-selection { color: #000;  background: @main-theme-color; }
 ::selection      { color: #000;  background: @main-theme-color; }
 
@@ -119,7 +126,7 @@ LAYOUT & GRID STYLES
 }
 
 .wrap {
-	//width: 90%;
+	width: 90%;
 	margin: 0;
 	margin-left: 20px; 
 }
@@ -622,7 +629,18 @@ POSTS & CONTENT STYLES
 		.highlight {
 			background: @main-theme-color;
 			color: white;
-			padding: 2em;
+			//padding: 2em;
+		}
+
+		.ico-tel {background: url(../images/tel-ico-small.png) center left no-repeat; width:20px; }
+		.ico-email {background: url(../images/mail-ico-small.png) center left no-repeat; width:20px;}
+
+		.tel { letter-spacing: -1px; margin:0;}
+
+		.ico-tel, .ico-email, .tel, .email {
+			display:inline-block;
+			margin-top:5px;
+			&.first {margin-top:0;}
 		}
 
 		/* post content */
@@ -778,12 +796,20 @@ POSTS & CONTENT STYLES
 				* {
 					color: white;
 				}
-				padding: 0.7em;
+				.results-container { padding: 0.7em; }
+
+				.cell { display: table-cell; width:30%; text-align: center; padding-right:3%;}
+
+				.tel, .email {
+					text-decoration: underline;
+				}
+
+
 			}	
 
 			//NOTE:TEMP
 			#links {
-				border: solid 1px;
+				//border: solid 1px;
 			}
 			
 		}
@@ -1386,21 +1412,6 @@ FOOTER STYLES
 
 		//NOTE exeptions dans la grille ... pas bien ! (a corriger dés que possible)
 		#address {
-
-			width:10.09375%+4%-1px;
-			border-right: 1px solid @main-theme-color-light;			
-
-			.ico-tel {background: url(../images/tel-ico-small.png) center left no-repeat; width:20px; }
-			.ico-email {background: url(../images/mail-ico-small.png) center left no-repeat; width:20px;}
-
-			.tel { letter-spacing: -1px; margin:0;}
-
-			.ico-tel, .ico-email, .tel, .email {
-				display:inline-block;
-				margin-top:5px;
-				&.first {margin-top:0;}
-			}
-
 		}
 		#social-links {
 			margin-left: 1.5%;

@@ -13,7 +13,7 @@ come into play. Have fun!
 ******************************************************************/
 
 
-/*********************
+/*********************	
 LAYOUT & GRID STYLES
 *********************/
 
@@ -30,11 +30,12 @@ LAYOUT & GRID STYLES
 	.sevencol  { width: 87.246963562753%; } /* grid_7  */
 	.eightcol  { width: 100%; }  /* grid_8  */
 
+	.onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol { 
+		margin-left: 2.024291497976%;
+	}
+	
 	.first {
 	   	margin-left: 0;
-	}
-	.onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol, .twelvecol { 
-		margin-left: 2.024291497976%;
 	}
 
 /*********************
@@ -201,8 +202,7 @@ NAVIGATION STYLES
 /*********************
 POSTS & CONTENT STYLES
 *********************/
-
-section {
+.hentry, section {
 	background: url(../images/separateur-768.png) transparent left top no-repeat;
 }
 
@@ -367,22 +367,32 @@ mobile. Make sure to double check these!
 } /* end .footer-links */
 .footer {
 	#inner-footer {
-		#social-links ul li 
-		{
-			float:left;
-			display: block;
-			width:50%;
-			a{
-				width:100%;
-				height: 36px;
+		#address {
+			.onecol();
+			.first();
+			width:10.09375%+4%;
+			border-right: 1px solid @main-theme-color-light;			
 
-				display: block;
-				
-				margin-top: 35px;
-
-				&.first {
-					margin-top: 0;
-				}	
+			div.column {
+				margin:0;
+			}
+		}
+		#social-links
+		{	
+			.onecol();
+			.first();
+			.last();
+			ul {
+				display : block; margin-right:10px;
+				li 
+				{
+					float:left;
+					display: block;
+					width:50%;
+					a{
+						margin-top: 35px;
+					}
+				}
 			}
 		}
 	}

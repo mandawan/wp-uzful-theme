@@ -631,13 +631,9 @@ span.amp {
 }
 .black {
   color: black;
-  height: 400px;
-  background-color: grey;
 }
 .white {
-  color: black;
-  height: 400px;
-  background-color: #fafafa;
+  color: white;
 }
 /*********************
 BORDER RADIUS
@@ -762,6 +758,31 @@ a.button-cta:visited span#plus {
   right: 5px;
   bottom: 0;
   z-index: 10;
+}
+a.button-goto-project,
+a.button-goto-project:visited {
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+a.button-goto-project #plus,
+a.button-goto-project:visited #plus {
+  background: url(../images/arrow-sqr.png) transparent center center no-repeat;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+a.button-goto-project:hover #plus,
+a.button-goto-project:visited:hover #plus {
+  -webkit-transform: translate(0.2em, 0);
+  -moz-transform: translate(0.2em, 0);
+  -o-transform: translate(0.2em, 0);
+  -ms-transform: translate(0.2em, 0);
+  transform: translate(0.2em, 0);
 }
 a.button-more,
 a.button-more:visited {
@@ -1018,6 +1039,12 @@ body {
 input::-webkit-input-placeholder {
   color: white;
 }
+hr {
+  height: 0;
+  border-top: solid 1px #009ecc;
+  border-bottom: solid 1px #40d4ff;
+  width: 100%;
+}
 ::-moz-selection {
   color: #000;
   background: #00c6ff;
@@ -1106,6 +1133,7 @@ LAYOUT & GRID STYLES
 
 }
 .wrap {
+  width: 90%;
   margin: 0;
   margin-left: 20px;
 }
@@ -1580,7 +1608,31 @@ POSTS & CONTENT STYLES
 .highlight {
   background: #00c6ff;
   color: white;
-  padding: 2em;
+}
+.ico-tel {
+  background: url(../images/tel-ico-small.png) center left no-repeat;
+  width: 20px;
+}
+.ico-email {
+  background: url(../images/mail-ico-small.png) center left no-repeat;
+  width: 20px;
+}
+.tel {
+  letter-spacing: -1px;
+  margin: 0;
+}
+.ico-tel,
+.ico-email,
+.tel,
+.email {
+  display: inline-block;
+  margin-top: 5px;
+}
+.ico-tel.first,
+.ico-email.first,
+.tel.first,
+.email.first {
+  margin-top: 0;
 }
 /* post content */
 .post-content {
@@ -1671,14 +1723,22 @@ POSTS & CONTENT STYLES
 .type-folio_work .results {
   background: #00c6ff;
   color: white;
-  padding: 2em;
-  padding: 0.7em;
 }
 .type-folio_work .results * {
   color: white;
 }
-.type-folio_work #links {
-  border: solid 1px;
+.type-folio_work .results .results-container {
+  padding: 0.7em;
+}
+.type-folio_work .results .cell {
+  display: table-cell;
+  width: 30%;
+  text-align: center;
+  padding-right: 3%;
+}
+.type-folio_work .results .tel,
+.type-folio_work .results .email {
+  text-decoration: underline;
 }
 /* index */
 p#logo {
@@ -2110,35 +2170,6 @@ FOOTER STYLES
   -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
 }
-.footer #inner-footer #address {
-  width: 13.09375%;
-  border-right: 1px solid #40d4ff;
-}
-.footer #inner-footer #address .ico-tel {
-  background: url(../images/tel-ico-small.png) center left no-repeat;
-  width: 20px;
-}
-.footer #inner-footer #address .ico-email {
-  background: url(../images/mail-ico-small.png) center left no-repeat;
-  width: 20px;
-}
-.footer #inner-footer #address .tel {
-  letter-spacing: -1px;
-  margin: 0;
-}
-.footer #inner-footer #address .ico-tel,
-.footer #inner-footer #address .ico-email,
-.footer #inner-footer #address .tel,
-.footer #inner-footer #address .email {
-  display: inline-block;
-  margin-top: 5px;
-}
-.footer #inner-footer #address .ico-tel.first,
-.footer #inner-footer #address .ico-email.first,
-.footer #inner-footer #address .tel.first,
-.footer #inner-footer #address .email.first {
-  margin-top: 0;
-}
 .footer #inner-footer #social-links {
   margin-left: 1.5%;
 }
@@ -2313,6 +2344,7 @@ tweeners.
   background-image: -moz-linear-gradient(center bottom, #dacdb1 11%, #f0e8d8 56%);  
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.11, #dacdb1), color-stop(0.56, #f0e8d8));  
   */
+  .hentry,
   section {
     background: url(../images/separateur-481.png) transparent left top no-repeat;
   }
@@ -2491,6 +2523,34 @@ tweeners.
   check your menus here. do they look good?
   do they need tweaking?
   */
+  .footer #inner-footer #address {
+    width: 100%;
+    margin-left: 0;
+  }
+  .footer #inner-footer #address div.column {
+    margin: 15px 25px 15px 0;
+  }
+  .footer #inner-footer #social-links {
+    width: 100%;
+    margin-left: 0;
+    float: right;
+  }
+  .footer #inner-footer #social-links ul {
+    display: table;
+    width: 100%;
+  }
+  .footer #inner-footer #social-links ul li {
+    display: table-cell;
+    width: 10%;
+  }
+  .footer #inner-footer #social-links ul li a {
+    width: 100%;
+    height: 36px;
+    display: block;
+  }
+  .footer #inner-footer #social-links ul li a.first {
+    margin-top: 0;
+  }
   /* end .footer-links */
 }
 /*
@@ -2513,7 +2573,7 @@ you can add resource intensive styles.
   come into play. Have fun!
   
   ******************************************************************/
-  /*********************
+  /*********************	
   LAYOUT & GRID STYLES
   *********************/
   /*
@@ -2551,9 +2611,6 @@ you can add resource intensive styles.
     width: 100%;
   }
   /* grid_8  */
-  .first {
-    margin-left: 0;
-  }
   .onecol,
   .twocol,
   .threecol,
@@ -2561,12 +2618,11 @@ you can add resource intensive styles.
   .fivecol,
   .sixcol,
   .sevencol,
-  .eightcol,
-  .ninecol,
-  .tencol,
-  .elevencol,
-  .twelvecol {
+  .eightcol {
     margin-left: 2.024291497976%;
+  }
+  .first {
+    margin-left: 0;
   }
   /*********************
   GENERAL STYLES
@@ -2691,6 +2747,7 @@ you can add resource intensive styles.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  .hentry,
   section {
     background: url(../images/separateur-768.png) transparent left top no-repeat;
   }
@@ -2754,19 +2811,33 @@ you can add resource intensive styles.
   
   }
   /* end .footer-links */
+  .footer #inner-footer #address {
+    width: 10.728744939271%;
+    margin-left: 2.024291497976%;
+    margin-left: 0;
+    width: 14.09375%;
+    border-right: 1px solid #40d4ff;
+  }
+  .footer #inner-footer #address div.column {
+    margin: 0;
+  }
+  .footer #inner-footer #social-links {
+    width: 10.728744939271%;
+    margin-left: 2.024291497976%;
+    margin-left: 0;
+    float: right;
+  }
+  .footer #inner-footer #social-links ul {
+    display: block;
+    margin-right: 10px;
+  }
   .footer #inner-footer #social-links ul li {
     float: left;
     display: block;
     width: 50%;
   }
   .footer #inner-footer #social-links ul li a {
-    width: 100%;
-    height: 36px;
-    display: block;
     margin-top: 35px;
-  }
-  .footer #inner-footer #social-links ul li a.first {
-    margin-top: 0;
   }
 }
 /*
@@ -2789,6 +2860,7 @@ you can add resource intensive styles.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  .hentry,
   section {
     background: url(../images/separateur-1030.png) transparent left top no-repeat;
   }

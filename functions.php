@@ -61,6 +61,22 @@ require_once('library/mixins-extended-admin.php');
 */
 require_once('library/translation/translation.php'); // this comes turned off by default
 
+
+/************* MULTIPLE POST THUMBNAILS REGISTRATION FOR ALL TYPE *************/
+
+if (class_exists('MultiPostThumbnails')) {
+    $types = array('post', 'page', 'folio_work', 'extension', 'offer');
+    foreach($types as $type) {
+        new MultiPostThumbnails(array(
+            'label' => 'Secondary Image',
+            'id' => 'secondary-image',
+            'post_type' => $type
+            )
+        );
+    }
+}
+
+
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
@@ -241,6 +257,15 @@ function ajaxed_links($fullLink){
     $ndd = get_bloginfo('url');
     $ancre = str_replace($ndd,'',$fullLink); //on décompose
     return $ndd.'/#!'.$ancre; //on recompose
+}
+
+function un_ajaxed_links($fullLink){
+    error_log("unajaxed -> ".$fullLink);
+    $ndd = get_bloginfo('url').'/#!';
+    $ancre = str_replace($ndd,'',$fullLink); //on décompose
+
+    error_log("unajaxed -> ".$ancre);
+    return $ndd.$ancre; //on recompose
 }
 
 // Enable indexing by treating links that already pointed to an anchor

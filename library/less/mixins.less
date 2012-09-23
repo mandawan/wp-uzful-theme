@@ -198,13 +198,13 @@ span.amp {
 }
 .black { 
 	color:black;
-	height:400px;
-	background-color:grey;
+	//height:400px;
+	//background-color:grey;
 } 
 .white { 
-	color:black;
-	height:400px;
-	background-color:rgba(250,250,250,1);
+	color:white;
+	//height:400px;
+	//background-color:rgba(120,250,250,1);
 } 
 
 /*********************
@@ -422,7 +422,31 @@ a.button-cta, a.button-cta:visited {
 	
 }
 
-	
+a.button-goto-project, a.button-goto-project:visited {
+	.transition();
+
+
+	#plus{
+		background: url(../images/arrow-sqr.png) transparent center center no-repeat;
+		
+		//webkit-transition: all .3s ease-out;
+		-webkit-transform: translate(0,0);
+		-moz-transform: translate(0,0);
+		-o-transform: translate(0,0);
+		-ms-transform: translate(0,0);
+		transform: translate(0,0);		
+	}
+
+	&:hover #plus{
+	    -webkit-transform: translate(.2em,0);
+		-moz-transform: translate(.2em,0);
+		-o-transform: translate(.2em,0);
+		-ms-transform: translate(.2em,0);
+		transform: translate(.2em,0);
+	}
+}
+
+
 a.button-more, a.button-more:visited 
 { 
 	.transition();

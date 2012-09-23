@@ -57,7 +57,7 @@ var $mainwrapper = jQuery('#main-wrapper'),
     params = {
         firstLoad:true,
         firstPage:true,
-        rootURL:''
+        rootURL:'http://127.0.0.1/uzful.fr/www/'
     }
     $myEventDisatchObj = jQuery(EventDispatcher.getInstance()),
     $anchorsListMenu = jQuery('#anchors-list');

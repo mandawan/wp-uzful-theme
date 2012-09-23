@@ -31,13 +31,17 @@ function initHistory()
 
 function buildHistory()
 {
-  console.log("addToHistory :"+window.location.href);
-
-
   if(params.firstPage) return;
 
-  var pUrl = params.rootURL+'#!/'+dataDisplayed[0] + '/' +  dataDisplayed[1];
+  var pUrl = params.rootURL;
+  pUrl += (dataDisplayed[0]) ? dataDisplayed[0] : '';
+  pUrl += (dataDisplayed[1]) ? dataDisplayed[1] : '';
   var pTitle = document.title;
+
+  console.log("addToHistory :"+pUrl);
+
+
+
     
   //if($.session.get('histArray') && $.session.get('histArray') != 'undefined')
     //histArray = Array($.session.get('histArray'));
@@ -62,7 +66,7 @@ function buildHistory()
         console.log('HAVE TO REMOVE FROM '+i);
       }
       //NOTE:suppression de tout élément d'historique  postérieur à l'index à conserver
-      if(histIndex <= i)
+      if(histIndex <= i && i!= 0) // on ne veut pas remove le premier bouton qui est le bouton home
       {
         $target.remove();
         console.log(i+'REMOVED');
@@ -73,6 +77,9 @@ function buildHistory()
 
   }
   
+  //cas particulier de l'url root -> le bouton est déjà présent et unique, l'entrée est laissée dans l'hitorique telle qu'à l'init
+  if(pUrl == params.rootURL) return;
+
   //NOTE:on a reculé dans l'historique visuel -> MAJ l'historique data
   if(histIndex >= histArray.length)
     histArray.splice(histIndex, (histArray.length - histIndex --));

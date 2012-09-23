@@ -59,10 +59,12 @@ single-bookmarks.php
 							    		$relExt = $relExt[0];
 							    	$myExt = get_post($relExt);
 							    	$client_name = $myExt->post_title;
+							    	$client_id = $myExt->ID;
 							    }
 							    else
 							    {
 							    	$client_name = $client->user_nicename;	
+							    	$client_id = $client->ID;
 							    }
 
 							    //LES OFFRES LIEES A CE PROJET
@@ -98,11 +100,7 @@ single-bookmarks.php
 
 					    		//LES PARTENAIRES LIES A CE PROJET
 					    		$partners_ids = get_post_meta($post->ID, 'rel_partners', false);
-							    
-								//var_dump($employees_ids);
-								//echo '<br>';
-					    		
-
+							    								
 							    if($partners_ids)
 							    {
 									$args2 = array(
@@ -121,8 +119,8 @@ single-bookmarks.php
 								    <div class="alignleft clearfix">
 
 								    	<h2 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-										<p class="subtitle"><?php echo esc_attr( get_post_meta( $post->ID, '_meta_subtitle', true ) ); ?></p>
-								    	<p class="meta"><?php //_e('Posted', 'uzfultheme'); ?> Réalisation en <time datetime="<?php echo the_time('m-Y'); ?>" pubdate><?php the_time(get_option('date_format')); ?> </time> pour <?php echo $client_name; ?></p>
+										<p class="subtitle"><?php echo esc_attr( get_post_meta( $post->ID, '_meta_subtitle', true ) ); ?></p>							    	
+										<p><?php //_e('Posted', 'uzfultheme'); ?> Réalisation en <time datetime="<?php echo the_time('m-Y'); ?>" pubdate><?php the_time(get_option('date_format')); ?> </time> pour <?php echo $client_name; ?></p>										
 
 								    </div>
 								</div>
@@ -155,9 +153,8 @@ single-bookmarks.php
 						    </header> <!-- end article header -->
 					
 						    <section class="post-content" >
-						    	
 						    	<div id="chapeau" class="sixcol first post-content" >
-						    		<a href="<?php the_permalink() ?>" class="image-link" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail('uzful-thumb-700'); ?></a>
+						    		<a href="<?php the_permalink() ?>" class="image-link" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo MultiPostThumbnails::the_post_thumbnail('folio_work', 'secondary-image', NULL,  'uzful-thumb-700'); ?></a>
 						    		<div id="sum" class="resume clearfix">
 									    <?php 
 									    
@@ -219,10 +216,13 @@ single-bookmarks.php
 									    ?>
 
 						    		</div><!-- end  partners -->
-						    		
+						    		<div id="client">
+						    			<h3>Une belle idée réalisée pour :</h3>
+						    			<a class="image-link alignleft"><?php echo user_avatar_get_avatar($client_id, 72); ?></a>
+						    		</div><!-- end  client -->
 						    	</div><!-- end  ressources -->
 						    	
-						    	<div id="description" class="post-content eightcol clearfix">
+						    	<div id="description" class="post-content first eightcol clearfix">
 						    		
 						    			<?php the_content(); ?>
 
@@ -232,22 +232,37 @@ single-bookmarks.php
 						
 						    <footer class="article-footer">
 
-								<div id="links" class="eightcol first clearfix">
-								    <a href="<?php echo  get_post_meta( $post->ID, '_work_url_related', true ) ?>">lien vers le projet</a>
-								    <br>
-								    ici on aura les liens + boutons sociaux
-								    	
-								</div><!-- end  desc -->
+								<div id="links1" class="threecol first">
+									<?php if(get_post_meta( $post->ID, '_work_url_related', true)) { ?>
+								    	<a class="button-goto-project button-cta plus " href="<?php echo  get_post_meta( $post->ID, '_work_url_related', true ); ?>"><span id="text">Voir le projet en vrai !</span><span id="plus"></span></a>								    
+								    <?php } ?>
+								    								    	
+								</div><!-- end  links1 -->
 
+								<div id="links2" class="fivecol last">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php post_permalink() ?>" data-via="uzful" data-lang="fr" data-related="uzful">Tweeter</a>					
+									<div class="fb-like" data-href="<?php post_permalink() ?>" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false" data-font="verdana"></div>									
+									
+									<a href="<?php echo "http://pinterest.com/pin/create/button/?url=".urlencode(post_permalink())."&media=".urlencode(MultiPostThumbnails::get_post_thumbnail_url('folio_work', 'secondary-image'))."&description=".urlencode(the_excerpt()).""; ?>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+								</div><!-- end  links1 -->
 						    	<div class="results fivecol first">
-						    		
-						    		<h3>Résultats</h3>
-						    		<p>
-						    			<?php 
-						    				$results =  get_post_meta( $post->ID, '_work_results', true );
-									    	echo $results;
-						    			?>
-						    		</p>
+						    		<div class="results-container">
+							    		<h3>Résultats</h3>
+							    		<p>
+							    			<?php 
+							    				$results =  get_post_meta( $post->ID, '_work_results', true );
+										    	echo $results;
+							    			?>
+							    		</p>
+							    		<hr/>
+							    		<h3 class="cell">Ca vous donne envie ?</h3>
+							    		<div class="cell">
+											<div class="image-replacement ico-tel first">Téléphone : </div><span class="tel">+33 1 47 85 21 47</span> <!-- classe hCard d’e-mail -->
+										</div>
+										<div class="cell">
+											<div class="image-replacement ico-email first">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('job@uzful.fr', 1, 0); ?>">Contacte-nous !</a> <!-- classe hCard d’e-mail -->
+										</div>
+						    		</div>
 						    	</div>
 						    	<div class="plus threecol last">
 						    		

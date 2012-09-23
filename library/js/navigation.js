@@ -171,10 +171,7 @@ function navigateTo(pTarget)
     url = pTarget;
     //on retrouve le vrai lien
     var arg = (url.indexOf('#!/') >= 0) ? url.substring(url.indexOf(hashtag)+3) : '';
-    //global rootURL trouvé en JS
-    //TODO : remplacer par du PHP si nécessaire ?
-    params.rootURL = String(url).slice(0, String(url).indexOf(hashtag));
-
+    
     //ON RENSEIGNE LES DONNEES A CHARGER PAR NIVEAU
     var reg=new RegExp("[ /;]+", "g");
     dataToLoad = String(arg).split(reg);
@@ -434,7 +431,9 @@ function transFadeIn(o){
         //console.log( "marginLeft: ", now );
       },
       complete:function(){
+        console.log(dataDisplayed);
         buildHistory(); 
+
         $($myEventDisatchObj).trigger({ type:customEvents.contentFadeOutComplete });
       }
       

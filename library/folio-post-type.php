@@ -209,14 +209,14 @@ function setup_rel_employees($post){
         //$user->user_email
         //$user->user_nicename
         //$user->ID
-        echo '      <li><label><input type="checkbox" name="cond[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
+        echo '      <li><label><input type="checkbox" name="employees[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
     }
     echo '      <li>------------------</li>';
     foreach ($blogEmployees as $user) {
         //$user->user_email
         //$user->user_nicename
         //$user->ID
-        echo '      <li><label><input type="checkbox" name="cond[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
+        echo '      <li><label><input type="checkbox" name="employees[]" '.check($cond,$user->ID).' value="'.$user->ID.'"" />'.$user->user_nicename.'</label></li>';
     }
 
     echo '  </ul>';
@@ -255,7 +255,7 @@ function save_rel_employees($post_id){
         // je supprime toutes les entrées pour cette meta
         delete_post_meta($post_id, '_work_rel_emp');
         // et pour chaque conditionnement coché, j'ajoute une metadonnée
-        foreach($_POST['cond'] as $c){
+        foreach($_POST['employees'] as $c){
             add_post_meta($post_id, '_work_rel_emp', intval($c) );
         }
     }

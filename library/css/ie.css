@@ -159,13 +159,9 @@ span.amp {
 }
 .black {
   color: black;
-  height: 400px;
-  background-color: grey;
 }
 .white {
-  color: black;
-  height: 400px;
-  background-color: #fafafa;
+  color: white;
 }
 /*********************
 BORDER RADIUS
@@ -290,6 +286,31 @@ a.button-cta:visited span#plus {
   right: 5px;
   bottom: 0;
   z-index: 10;
+}
+a.button-goto-project,
+a.button-goto-project:visited {
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+a.button-goto-project #plus,
+a.button-goto-project:visited #plus {
+  background: url(../images/arrow-sqr.png) transparent center center no-repeat;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+a.button-goto-project:hover #plus,
+a.button-goto-project:visited:hover #plus {
+  -webkit-transform: translate(0.2em, 0);
+  -moz-transform: translate(0.2em, 0);
+  -o-transform: translate(0.2em, 0);
+  -ms-transform: translate(0.2em, 0);
+  transform: translate(0.2em, 0);
 }
 a.button-more,
 a.button-more:visited {
@@ -543,6 +564,7 @@ POSTS & CONTENT STYLES
 background-image: -moz-linear-gradient(center bottom, #dacdb1 11%, #f0e8d8 56%);  
 background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.11, #dacdb1), color-stop(0.56, #f0e8d8));  
 */
+.hentry,
 section {
   background: url(../images/separateur-481.png) transparent left top no-repeat;
 }
@@ -721,6 +743,24 @@ FOOTER STYLES
 check your menus here. do they look good?
 do they need tweaking?
 */
+.footer #inner-footer #social-links {
+  width: 100%;
+  margin-left: 0;
+  width: 48.987854251012%;
+  margin-left: 2.024291497976%;
+}
+.footer #inner-footer #social-links ul li {
+  display: table-cell;
+}
+.footer #inner-footer #social-links ul li a {
+  width: 100%;
+  height: 36px;
+  display: block;
+  margin-top: 35px;
+}
+.footer #inner-footer #social-links ul li a.first {
+  margin-top: 0;
+}
 /* end .footer-links */
 /******************************************************************
 Site Name: 
@@ -735,7 +775,7 @@ and other resources. You'll also notice the grid starts to
 come into play. Have fun!
 
 ******************************************************************/
-/*********************
+/*********************	
 LAYOUT & GRID STYLES
 *********************/
 /*
@@ -773,9 +813,6 @@ LAYOUT & GRID STYLES
   width: 100%;
 }
 /* grid_8  */
-.first {
-  margin-left: 0;
-}
 .onecol,
 .twocol,
 .threecol,
@@ -783,12 +820,11 @@ LAYOUT & GRID STYLES
 .fivecol,
 .sixcol,
 .sevencol,
-.eightcol,
-.ninecol,
-.tencol,
-.elevencol,
-.twelvecol {
+.eightcol {
   margin-left: 2.024291497976%;
+}
+.first {
+  margin-left: 0;
 }
 /*********************
 GENERAL STYLES
@@ -913,6 +949,7 @@ NAVIGATION STYLES
 /*********************
 POSTS & CONTENT STYLES
 *********************/
+.hentry,
 section {
   background: url(../images/separateur-768.png) transparent left top no-repeat;
 }
@@ -976,6 +1013,11 @@ mobile. Make sure to double check these!
 
 }
 /* end .footer-links */
+.footer #inner-footer #social-links {
+  width: 10.728744939271%;
+  margin-left: 2.024291497976%;
+  margin-left: 0;
+}
 .footer #inner-footer #social-links ul li {
   float: left;
   display: block;
@@ -1003,6 +1045,7 @@ be seen on the Desktop.
 /*********************
 POSTS & CONTENT STYLES
 *********************/
+.hentry,
 section {
   background: url(../images/separateur-1030.png) transparent left top no-repeat;
 }
