@@ -65,7 +65,7 @@ require_once('library/translation/translation.php'); // this comes turned off by
 /************* MULTIPLE POST THUMBNAILS REGISTRATION FOR ALL TYPE *************/
 
 if (class_exists('MultiPostThumbnails')) {
-    $types = array('post', 'page', 'folio_work', 'extension', 'offer');
+    $types = array('folio_work', 'extension', 'offer');
     foreach($types as $type) {
         new MultiPostThumbnails(array(
             'label' => 'Secondary Image',
@@ -84,7 +84,7 @@ add_image_size( 'uzful-thumb-700', 730, 400, true );
 add_image_size( 'uzful-thumb-480', 480, 300, false );
 add_image_size( 'uzful-thumb-355', 355, 240, false );
 add_image_size( 'uzful-thumb-230', 230, 9999, false );
-add_image_size( 'uzful-thumb-180', 180, 100, false );
+add_image_size( 'uzful-thumb-180', 180, 100, true );
 add_image_size( 'uzful-thumb-72', 72, 72, true );
 add_image_size( 'uzful-thumb-55', 55, 55, true );
 /* 
@@ -120,10 +120,15 @@ function uzful_scripts_and_styles ()
 
     //TODO tout repasser en register + enqueue + tester de déplacer un max de trucs depuis bones.php vers ici.
     wp_register_script( 'jquery-ui', get_stylesheet_directory_uri() . '/library/js/libs/jquery-ui.js', array('jquery'), '', true );
+    wp_register_script( 'jquery-easing', get_stylesheet_directory_uri() . '/library/js/libs/jquery.easing.1.3.js', array('jquery'), '1.3', true );
     wp_register_script( 'jquery-transit', get_stylesheet_directory_uri() . '/library/js/libs/jquery.transit.min.js', array('jquery'), '', true );
     wp_register_script( 'debounce', get_stylesheet_directory_uri() . '/library/js/libs/jquery.debounce.js', array('jquery'), '', true );
     wp_register_script( 'gmaps', 'http://maps.google.com/maps/api/js?sensor=false', '', true );
     wp_register_script( 'jquery-waypoints', get_stylesheet_directory_uri() . '/library/js/libs/waypoints.min.js', array('jquery'), '1.1.7', true );
+    wp_register_script( 'jquery-infinite-carousel', get_stylesheet_directory_uri() . '/library/js/libs/jquery.inifinite-carousel.js', array('jquery'), '1.0', true );
+    //TODO remove this if unused
+    wp_register_script( 'jquery-fred-carousel', get_stylesheet_directory_uri() . '/library/js/libs/jquery.carouFredSel-5.6.4-packed.js', array('jquery'), '5.6.4', true );
+    wp_register_script( 'jquery-touchwipe', get_stylesheet_directory_uri() . '/library/js/libs/jquery.touchwipe.min.js', array('jquery'), '1.1.1', true );
 
     //AntiScroll Bar
     wp_enqueue_script( 'mousewheel-script', get_stylesheet_directory_uri() . '/library/js/libs/jquery-mousewheel.js', array('jquery'), '', true);
@@ -144,7 +149,7 @@ function uzful_scripts_and_styles ()
 
     wp_enqueue_script( 'scrollTo', get_stylesheet_directory_uri() . '/library/js/libs/jquery.scrollTo.js', array('jquery'), '1.4.3.1', true);    
     wp_enqueue_script( 'ajax-history', get_stylesheet_directory_uri() . '/library/js/myHistory.js', array( 'hashchange', 'jquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit' ), '1.0', true);   
-    wp_enqueue_script( 'ajax-nav', get_stylesheet_directory_uri() . '/library/js/navigation.js', array( 'hashchange', 'jquery', 'bones-js', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit', 'ajax-history', 'jquery-waypoints' ), '1.0', true);   
+    wp_enqueue_script( 'ajax-nav', get_stylesheet_directory_uri() . '/library/js/navigation.js', array( 'hashchange', 'jquery', 'bones-js', 'jquery-easing', 'debounce', 'jquery-cookie', 'jquery-session', 'jquery-transit', 'ajax-history', 'jquery-waypoints' ), '1.0', true);   
     wp_enqueue_script( 'gmaps');
     //
     
@@ -229,11 +234,11 @@ function bones_comments($comment, $args, $depth) {
 
 // Search Form
 function bones_wpsearch($form) {
-    $form = '<div id="search-form-wrap" class="alignleft">
+    $form = '<div id="search-form-wrap" class="clearfix">
     <form role="search" method="get" id="searchform" action="'. home_url() .'" /">
-    <div class="clearfix">
-    <input class="fleft search" type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="Que cherches-tu ?...">
-    <input class="fleft submit image-replacement"type="submit" value="Submit" />
+    <div id="search-box" class="clearfix">
+    <input class="search" type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="Que cherches-tu ?..."/>
+    <button id="search-button" class="submit image-replacement" type="submit"><span>Rechercher</span></button>
     </div>
     </form>
     </div>';
@@ -289,6 +294,7 @@ function remove_editor_menu() {
 
 add_action('_admin_menu', 'remove_editor_menu', 1);
 
+
 /************* CUSTOM RSS FEED *****************/
 
 function myfeed_request($qv) {
@@ -301,6 +307,81 @@ function myfeed_request($qv) {
 add_filter('request', 'myfeed_request');
 
 /************ UTILS ******************/
+
+/**
+ * Adding a checkbox to the attachment edition panel
+ * checked = display attachement image, title and caption to home as a push
+ *
+ * @param array $form_fields
+ * @param object $post
+ * @return array
+ */
+function _is_pushed_to_home_fields_to_edit($form_fields, $post) {
+    //we use this variable to set whether or not the checkbox is currently checked
+    //defaults to not being checked
+    $checked = get_post_meta($post->ID, "is_pushed_to_home", true) ? "CHECKED" : "";
+    
+    //to add a field to the form, there are a few values to set here
+    //label: the label of the field being output
+    //input: the type of input being output - can use 'html' as value for more custom control
+    //value: the current value of the input
+    //helps: the descriptive text shown below the field
+    //html: the custom html to use for a field if input is set to 'html' (see: 'ik_is_hero')
+    $form_fields["url_to_push"] = array(
+        "label" => __("URL to push on home page"),
+        'input' => "text",
+        "value" => get_post_meta($post->ID, "url_to_push", true),
+        "helps" => __("If checked, this image will show in the widget."),
+    );
+
+    $form_fields["is_pushed_to_home"] = array(
+        "label" => __("Show it as a push on home page"),
+        'input' => 'html',
+        'html'  => "<input type='checkbox'
+                name='attachments[{$post->ID}][is_pushed_to_home]'
+                id='attachments[{$post->ID}][is_pushed_to_home]'
+                        value='1' {$checked}/><br />",
+        "helps" => __("If checked, this image will show in the widget with its Title, caption, and description, it will be clickable to your URL too."),
+    );
+ 
+   return $form_fields;
+}
+ 
+// now attach our function to the hook
+add_filter("attachment_fields_to_edit", "_is_pushed_to_home_fields_to_edit", null, 2);
+
+function _is_pushed_to_home_fields_to_save($post, $attachment) {
+    global $wpdb;
+    //there can be only one attachment pushed to the home, we unpush any already pushed attachment
+    $wpdb->query( 
+        $wpdb->prepare("UPDATE wp_postmeta SET meta_value = 0 WHERE meta_key = 'is_pushed_to_home' AND meta_value = 1"
+        )
+    );
+
+    if( isset($attachment['url_to_push']) ){
+        update_post_meta($post['ID'], 'url_to_push', $attachment['url_to_push']);
+    }
+
+    //for the checkbox we save the value if it's currently checked
+    //if it's not checked there won't be a value set, so we set it to '0'
+    if( isset($attachment['is_pushed_to_home']) ){
+        update_post_meta($post['ID'], 'is_pushed_to_home', $attachment['is_pushed_to_home']);
+    } else {
+        update_post_meta($post['ID'], 'is_pushed_to_home', 0);
+    }
+    
+
+    $postID = $post['ID'];
+    $res = $wpdb->get_results( "UPDATE options SET value = $postID WHERE name = 'pushed_attachement_id'");
+
+    //error_log($res);
+
+    return $post;
+}
+ 
+// now attach our function to the hook
+add_filter("attachment_fields_to_save", "_is_pushed_to_home_fields_to_save", null , 2);
+
 
 function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
     $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
@@ -329,4 +410,18 @@ function obfuscate_email($email, $encode = 1, $reverse = 0, $before = '<span cla
  return $output;
 }
 
+function get_attachment_id_from_src ($image_src) {
+        global $wpdb;
+        $query = "SELECT ID FROM {$wpdb->posts} WHERE guid LIKE '%$image_src%' LIMIT 1";
+        $id = $wpdb->get_var($query);
+        return $id;
+}
+
+// cette fonction me sert à inscrire checked, si jamais la valeur est coché
+function check($cible,$test){
+    if(in_array($test,$cible)){return 'checked';}
+}
+function check2($value){
+    if($value OR $value == 'true' OR $value == 1 OR $value == '1'){return 'checked';}
+}
 ?>

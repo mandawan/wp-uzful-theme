@@ -1,25 +1,29 @@
 			<footer class="footer" role="contentinfo">
 			
 				<div id="inner-footer" class="wrap clearfix">
-					<div id="search" class="eightcol first">
-						<div class="first alignleft">
-							<h3 class="white">Ça marche comme Google :</h3>
-						</div>
-						<div class="alignleft">
-						    <?php get_search_form(); ?>
-						</div>
-
-						<div class="cell alignleft">
-							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.uzful.fr" data-via="uzful" data-lang="fr" data-related="uzful">Tweeter</a>					
-						</div>
+					<div id="search-and-social" class="eightcol first">
 						
-						<div class="cell alignleft">
-							<div class="fb-like" data-href="http://www.uzful.fr" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false" data-font="verdana"></div>
+							<div id="text" class="first twocol">
+								<h3 class="white">Ça marche comme Google :</h3>
+							</div>
+							<div id="form-container" class="threecol clearfix search-container">
+							    <?php get_search_form(); ?>
+							    
+							</div>
+						
+						<div id="" class="first threecol social-buttons">
+							<div class="alignleft">
+								<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.uzful.fr" data-via="uzful" data-lang="fr" data-related="uzful">Tweeter</a>					
+							</div>
+							
+							<div class="alignleft">
+								<div class="fb-like" data-href="http://www.uzful.fr" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false" data-font="verdana"></div>
+							</div>
 						</div>
 
 					</div>
 					<!-- //TODO: mettre une carte dynamique (open street maps ou gmaps) -->
-					<div id="map-container" class="sixcol first"><!--<img rel="map" class="" title="Nous retrouver facilement"/ src="<?php echo get_template_directory_uri(); ?>/library/images/map.png"/>-->
+					<div id="map-container" class="sixcol first map-uzful"><!--<img rel="map" class="" title="Nous retrouver facilement"/ src="<?php echo get_template_directory_uri(); ?>/library/images/map.png"/>-->
 						<div id="map">
 							<!-- //GMaps -->
 						</div>
@@ -31,7 +35,7 @@
 								<h3 class="white">On est là</h3>
 								<ul class="adr"> <!-- propriété globale d’adresse hCard -->
 									<li class="fn org name">Uzful</li>
-									<li class="title" style="display:none;">Agence utile</li>
+									<li class="title" style="	display:none;">Agence utile</li>
 									<li class="street-address">48-50, rue voltaire</li>
 									<li><span class="postal-code">93100</span><span>, </span><span class="locality">Montreuil</span>
 										<span class="country-name" style="text-transform: uppercase;">France</span>
@@ -42,13 +46,13 @@
 								<h3 class="white clearfix">Keep in touch</h3>
 								<div class="p">
 									<div><div class='image-replacement ico-tel first'>Tél. </div><span class="tel">+33 1 47 85 21 47</span> <!-- classe hCard de téléphone --></div>
-									<div><div class="image-replacement ico-email">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('contact@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('contact@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail --></div>
+									<div><div class="image-replacement ico-email">Email : </div><a class="email" href="schtroumpf=contact[pouet]uzful[lol]fr">contact[pouet]uzful[lol]fr</a> <!-- classe hCard d’e-mail --></div>
 								</div>
 							</div>
 							<div class="fleft column">
 								<h3 class="white">Uzful jobs</h3>
 								<div class="p">
-									<div class="image-replacement ico-email first">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('job@uzful.fr', 1, 0); ?>"><?php echo obfuscate_email('job@uzful.fr', 1); ?></a> <!-- classe hCard d’e-mail -->
+									<div class="image-replacement ico-email first">Email : </div><a class="email" href="schtroumpf=job[pouet]uzful[lol]fr">job[pouet]uzful[lol]fr</a> <!-- classe hCard d’e-mail -->
 								</div>
 							</div>
 						</div> <!-- end .vcard -->

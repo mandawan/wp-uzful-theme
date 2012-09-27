@@ -607,6 +607,15 @@ span.amp {
   padding: 5px 18px;
   border: 1px solid;
 }
+.vertalign {
+  display: table;
+  width: 100%;
+  vertical-align: bottom;
+}
+.vertalign div {
+  display: table-cell;
+  vertical-align: bottom;
+}
 .help {
   border-color: #e8dc59;
   background: #ebe16f;
@@ -931,6 +940,11 @@ a.goto-more:visited:hover #plus {
 IMAGE STYLES
 *********************/
 .greyimg {
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  -ms-transition: all 0.4s ease-in-out 0s;
+  -o-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
   filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
   /* Firefox 3.5+ */
 
@@ -938,8 +952,16 @@ IMAGE STYLES
   /* IE6-9 */
 
   -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
 }
 a.greyimg:hover {
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  -ms-transition: all 0.4s ease-in-out 0s;
+  -o-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
   filter: none;
   -webkit-filter: grayscale(0);
   -moz-filter: grayscale(0%);
@@ -1219,6 +1241,19 @@ h5 a,
 .h5 a {
   text-decoration: none;
 }
+h1 strong,
+.h1 strong,
+h2 strong,
+.h2 strong,
+h3 strong,
+.h3 strong,
+h4 strong,
+.h4 strong,
+h5 strong,
+.h5 strong {
+  font-weight: normal;
+  color: #00c6ff;
+}
 h1,
 .h1 {
   font-size: 6.2em;
@@ -1227,14 +1262,13 @@ h1,
 }
 h2,
 .h2 {
-  font-size: 4.5em;
-  line-height: 0.8em;
-  margin-bottom: 0.8em;
-  margin-top: 0.375em;
+  font-size: 4.0em;
+  line-height: 1em;
+  color: #b2b2b2;
 }
 h3,
 .h3 {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 h4,
 .h4 {
@@ -1329,6 +1363,11 @@ ol#history li.hist-10 {
 /*********************
 NAVIGATION STYLES
 *********************/
+section .anchor {
+  float: left;
+  position: absolute;
+  top: 0;
+}
 #vert-scrol-bg {
   position: absolute;
   background-color: #00c6ff;
@@ -1345,14 +1384,19 @@ NAVIGATION STYLES
   z-index: 1;
   height: 100%;
   width: 13px;
+  -webkit-transition: all 1s ease-in-out 0s;
+  -moz-transition: all 1s ease-in-out 0s;
+  -ms-transition: all 1s ease-in-out 0s;
+  -o-transition: all 1s ease-in-out 0s;
+  transition: all 1s ease-in-out 0s;
+}
+#right-navigation-container.large {
+  width: 380px;
   -webkit-transition: all 1.5s ease-in-out 0s;
   -moz-transition: all 1.5s ease-in-out 0s;
   -ms-transition: all 1.5s ease-in-out 0s;
   -o-transition: all 1.5s ease-in-out 0s;
   transition: all 1.5s ease-in-out 0s;
-}
-#right-navigation-container.large {
-  width: 380px;
 }
 #right-navigation-container .shadow {
   display: none;
@@ -1519,6 +1563,28 @@ and moe scalable.
 /*********************
 POSTS & CONTENT STYLES
 *********************/
+time {
+  font-family: BotonMed, Arial, sans-serif;
+  text-rendering: geometricPrecision;
+  font-weight: lighter;
+  color: #00c6ff;
+  margin: 0;
+  /*
+	if you're going to use webfonts, be sure to check your weights
+	http://css-tricks.com/watch-your-font-weight/
+	*/
+
+  /* removing text decoration from all headline links */
+
+  font-size: 1.5em;
+}
+time a {
+  text-decoration: none;
+}
+time strong {
+  font-weight: normal;
+  color: #00c6ff;
+}
 #content {
   margin-top: 2.2em;
 }
@@ -1545,6 +1611,11 @@ POSTS & CONTENT STYLES
 .page-title a {
   text-decoration: none;
 }
+.single-title strong,
+.page-title strong {
+  font-weight: normal;
+  color: #00c6ff;
+}
 .subtitle {
   font-family: BotonMed, Arial, sans-serif;
   text-rendering: geometricPrecision;
@@ -1564,6 +1635,10 @@ POSTS & CONTENT STYLES
 .subtitle a {
   text-decoration: none;
 }
+.subtitle strong {
+  font-weight: normal;
+  color: #00c6ff;
+}
 .meta {
   margin: 0;
   color: #b2b2b2;
@@ -1577,6 +1652,12 @@ POSTS & CONTENT STYLES
 /* hentry class */
 /* style by category (i.e. category-videos) */
 /* style by tag (i.e. tag-news) */
+.read-more {
+  color: #00c6ff;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 10px;
+}
 /* post meta */
 .meta {
   color: #999;
@@ -1594,11 +1675,15 @@ POSTS & CONTENT STYLES
 
   /* removing text decoration from all headline links */
 
-  font-size: 1.4em;
+  font-size: 1.5em;
   color: #b2b2b2;
 }
 .resume a {
   text-decoration: none;
+}
+.resume strong {
+  font-weight: normal;
+  color: #00c6ff;
 }
 .resume b,
 .resume strong {
@@ -1797,6 +1882,18 @@ p#logo {
 .index p {
   text-align: justify;
   text-justify: newspaper;
+}
+.index #home-blog h2 {
+  display: block;
+}
+.index #home-blog .vertalign {
+  width: 100%;
+}
+.index #home-blog .inner {
+  margin-top: 3em;
+}
+.index #home-blog img {
+  margin-bottom: 24px;
 }
 .title-block {
   display: block;
@@ -2063,7 +2160,15 @@ COMMENT FORM STYLES
 /*********************
 SIDEBARS & ASIDES
 *********************/
+#searchform {
+  height: 40px;
+  position: relative;
+  width: 96%;
+  margin-left: 0 2%;
+}
 #searchform input.search {
+  position: relative;
+  width: 90%;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -2072,8 +2177,14 @@ SIDEBARS & ASIDES
   color: white;
   margin-left: 0;
   margin-right: 0;
+  line-height: 16px;
+  padding: 7px;
+  z-index: 100;
 }
-#searchform input.submit {
+#searchform #search-button {
+  position: absolute;
+  top: 0;
+  right: 0;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -2083,8 +2194,10 @@ SIDEBARS & ASIDES
   border: none;
   padding: 0;
   margin: 0;
+  z-index: 101;
 }
-div#search-form-wrap {
+div#search-box {
+  width: 100%;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -2100,6 +2213,36 @@ div#search-form-wrap {
 /*********************
 FOOTER STYLES
 *********************/
+/* end .footer-links */
+.map-uzful {
+  width: 100%;
+}
+.map-uzful #map {
+  width: 98%;
+  height: 280px;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  /* Firefox 3.5+ */
+
+  filter: gray;
+  /* IE6-9 */
+
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
+  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+.search-container {
+  width: 100%;
+  margin-left: 0;
+}
 .footer {
   clear: both;
   color: white;
@@ -2136,6 +2279,35 @@ FOOTER STYLES
   background: #00c6ff;
   margin-left: 0px;
   padding-left: 20px;
+  /*		
+
+		div#search-and-social { 
+			//display:table; 
+			width: 100%;
+			margin-bottom: 5px; 
+			margin: 0 10px;
+			//width: 100%;
+		}
+		div.cell {
+			display: block;
+			margin:5px, auto;
+			//min-width:20%;
+			//text-align: center;
+			//margin-left: 70px;
+			
+		}
+
+		//NOTE exeptions dans la grille ... pas bien ! (a corriger dés que possible)
+
+		input.search {
+			
+
+		}
+		#s {
+			width: 90%;
+			position: relative;
+		}*/
+
 }
 .footer #inner-footer ul,
 .footer #inner-footer p,
@@ -2143,37 +2315,33 @@ FOOTER STYLES
   margin: 0.6em 0 1.3em 0;
   display: block;
 }
-.footer #inner-footer div#search {
+.footer #inner-footer #text {
   display: table;
-  margin-bottom: 5px;
-  padding-left: 10px;
 }
-.footer #inner-footer div.cell {
-  margin-left: 70px;
+.footer #inner-footer #text h3 {
+  white-space: nowrap;
 }
-.footer #inner-footer #map-container #map {
-  width: 98%;
-  height: 280px;
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  -moz-transition: all 0.2s ease-in-out 0s;
-  -ms-transition: all 0.2s ease-in-out 0s;
-  -o-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s;
-  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-  /* Firefox 3.5+ */
-
-  filter: gray;
-  /* IE6-9 */
-
-  -webkit-filter: grayscale(100%);
-  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+.footer #inner-footer #form-container {
+  margin-left: 3%;
 }
-.footer #inner-footer #social-links {
-  margin-left: 1.5%;
+.footer #inner-footer div.social-buttons div.alignleft {
+  padding: 10px 0;
+}
+.footer #inner-footer #address div.column {
+  margin: 5px 15px 5px 0;
+}
+.footer #inner-footer #social-links ul {
+  display: table;
+  width: 100%;
+}
+.footer #inner-footer #social-links ul li {
+  display: table-cell;
+  width: 10%;
 }
 .footer #inner-footer #social-links ul li a {
+  width: 100%;
+  height: 36px;
+  display: block;
   color: white;
   text-indent: -9999px;
   outline: none;
@@ -2223,6 +2391,9 @@ FOOTER STYLES
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=(50));
   filter: alpha(opacity = (50));
 }
+.footer #inner-footer #social-links ul li a.first {
+  margin-top: 0;
+}
 /*
 	if you checked out the link above:
 	http://www.alistapart.com/articles/organizing-mobile/
@@ -2246,6 +2417,109 @@ MISC
   height: 100%;
   z-index: 999;
   background-color: #00c6ff;
+}
+/*********************
+INFINITE CAROUSEL
+*********************/
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.carousel-wrapper .arrow {
+  display: block;
+  height: 100%;
+  width: 18px;
+  background: #00c6ff bottom center no-repeat;
+  text-indent: -999px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  -webkit-transition: background-color 0.2s ease-in-out 0s;
+  -moz-transition: background-color 0.2s ease-in-out 0s;
+  -ms-transition: background-color 0.2s ease-in-out 0s;
+  -o-transition: background-color 0.2s ease-in-out 0s;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+.carousel-wrapper .forward {
+  right: 0;
+  background-image: url(../images/arrow-carousel-right.png);
+}
+.carousel-wrapper .forward:hover {
+  -webkit-transition: background-color 0.2s ease-in-out 0s;
+  -moz-transition: background-color 0.2s ease-in-out 0s;
+  -ms-transition: background-color 0.2s ease-in-out 0s;
+  -o-transition: background-color 0.2s ease-in-out 0s;
+  transition: background-color 0.2s ease-in-out 0s;
+  background-color: #66ddff;
+}
+.carousel-wrapper .back {
+  left: 0;
+  background-image: url(../images/arrow-carousel-left.png);
+}
+.carousel-wrapper .back:hover {
+  -webkit-transition: background-color 0.2s ease-in-out 0s;
+  -moz-transition: background-color 0.2s ease-in-out 0s;
+  -ms-transition: background-color 0.2s ease-in-out 0s;
+  -o-transition: background-color 0.2s ease-in-out 0s;
+  transition: background-color 0.2s ease-in-out 0s;
+  background-color: #33d1ff;
+}
+.carousel-wrapper a {
+  display: block;
+}
+.carousel-wrapper .caroufredsel_wrapper {
+  margin: 0 auto;
+}
+.carousel-wrapper .list_carousel {
+  /*background-color: #ccc;
+		margin: 0 0 30px 60px;
+		width: 360px;*/
+
+  margin: 0 32px;
+}
+.carousel-wrapper .list_carousel ul {
+  padding: 0;
+  list-style: none;
+  display: block;
+}
+.carousel-wrapper .list_carousel li {
+  font-size: 40px;
+  width: 217px;
+  height: 217px;
+  padding: 0;
+  margin-right: 18px;
+  display: block;
+  float: left;
+}
+.carousel-wrapper .list_carousel.responsive {
+  width: auto;
+}
+.carousel-wrapper .clearfix {
+  float: none;
+  clear: both;
+}
+.carousel-wrapper .prev {
+  float: left;
+}
+.carousel-wrapper .next {
+  float: right;
+}
+.carousel-wrapper .pager {
+  float: left;
+  width: 300px;
+  text-align: center;
+}
+.carousel-wrapper .pager a {
+  margin: 0 5px;
+  text-decoration: none;
+}
+.carousel-wrapper .pager a.selected {
+  text-decoration: underline;
+}
+.carousel-wrapper .timer {
+  background-color: #999;
+  height: 6px;
+  width: 0px;
 }
 /*
 LARGER MOBILE DEVICES
@@ -2390,7 +2664,7 @@ tweeners.
   }
   .index section {
     display: block;
-    padding-top: 60px;
+    padding-top: 85px;
     padding-bottom: 85px;
   }
   .index section:before {
@@ -2414,7 +2688,7 @@ tweeners.
   }
   .index p.content-more {
     margin-top: 25px;
-    height: 120px;
+    min-height: 90px;
   }
   .index div.content-more {
     margin-top: 6px;
@@ -2427,9 +2701,6 @@ tweeners.
     -moz-column-gap: 1em;
     -webkit-column-gap: 1.5em;
   }
-  .index #home-works article {
-    margin-bottom: 27px;
-  }
   .index #home-offers a,
   .index #home-offers a:active,
   .index #home-offers a:hover {
@@ -2439,6 +2710,7 @@ tweeners.
     /*height:55px;*/
     display: table;
     width: 100%;
+    vertical-align: bottom;
   }
   .index #home-offers .title-wrap div {
     display: table-cell;
@@ -2454,13 +2726,32 @@ tweeners.
   .index #home-offers article {
     width: 48%;
     margin-left: 2%;
+    margin-bottom: 15px;
     float: left;
+  }
+  .index #home-works #works {
+    margin-top: 5em;
+  }
+  .index #home-works article {
+    margin-bottom: 27px;
+  }
+  .index #home-extensions #extensions {
+    margin-top: 5em;
   }
   .index #home-extensions article p {
     -moz-column-count: 1;
     -webkit-column-count: 1;
     -moz-column-gap: 0;
     -webkit-column-gap: 0;
+  }
+  .index #home-clients .clients {
+    margin-top: 5em;
+  }
+  .index #home-staff .staff {
+    margin-top: 5em;
+  }
+  .index #home-partners .partners {
+    margin-top: 5em;
   }
   /* end spécialindex */
   /* SPECIAL FOLIO WORKS */
@@ -2501,21 +2792,32 @@ tweeners.
   SIDEBARS & ASIDES
   *********************/
   /* search form */
-  div#search {
-    margin-bottom: 15px;
+  /*#search-form-wrap
+  {
+  	//width:314px;
+  	margin-top:-5px;
+  
+  	div { display: table-cell; }
+  
   }
-  #search-form-wrap {
-    margin-top: -5px;
+  #searchform {
+  	
+  	#s {  }
+  
+  	input.search {
+  		line-height: 16px;
+  		//height: 16px;
+  		//font-size: 1.8em;
+  		width:270px;
+  		padding: 7px;
+  		z-index: 100;
+  		//-moz-box-shadow:inset 2px 2px 5px #ccc;
+  		//box-shadow:inset 2px 2px 5px #ccc;
+  	}
+  
+  	input.submit {}
   }
-  #search-form-wrap div {
-    display: table-cell;
-  }
-  #searchform input.search {
-    line-height: 16px;
-    width: 270px;
-    padding: 7px;
-    z-index: 100;
-  }
+  */
   /*********************
   FOOTER STYLES
   *********************/
@@ -2523,6 +2825,15 @@ tweeners.
   check your menus here. do they look good?
   do they need tweaking?
   */
+  .footer #inner-footer div.cell {
+    min-width: 40%;
+  }
+  .footer #inner-footer div.social-buttons {
+    width: auto;
+  }
+  .footer #inner-footer div.social-buttons div.alignleft {
+    padding: 5px 25px 0 25px;
+  }
   .footer #inner-footer #address {
     width: 100%;
     margin-left: 0;
@@ -2531,27 +2842,11 @@ tweeners.
     margin: 15px 25px 15px 0;
   }
   .footer #inner-footer #social-links {
+    margin-left: 1.5%;
     width: 100%;
     margin-left: 0;
     float: right;
   }
-  .footer #inner-footer #social-links ul {
-    display: table;
-    width: 100%;
-  }
-  .footer #inner-footer #social-links ul li {
-    display: table-cell;
-    width: 10%;
-  }
-  .footer #inner-footer #social-links ul li a {
-    width: 100%;
-    height: 36px;
-    display: block;
-  }
-  .footer #inner-footer #social-links ul li a.first {
-    margin-top: 0;
-  }
-  /* end .footer-links */
 }
 /*
 TABLET & SMALLER LAPTOPS
@@ -2750,6 +3045,12 @@ you can add resource intensive styles.
   .hentry,
   section {
     background: url(../images/separateur-768.png) transparent left top no-repeat;
+  }
+  .hentry #employees,
+  section #employees,
+  .hentry #partners,
+  section #partners {
+    padding-bottom: 45px;
   }
   /*********************
   SIDEBARS & ASIDES

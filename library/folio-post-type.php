@@ -515,13 +515,6 @@ function metas_clean(&$arr)
 
 // NOTE: FUNCTION POOL
     
-    
-
-    // cette fonction me sert à inscrire checked, si jamais la valeur est coché
-    function check($cible,$test){
-        if(in_array($test,$cible)){return 'checked';}
-    }
-
 return;
 	// now let's add custom tags (these act like tags)
     register_taxonomy( 'custom_tag', 

@@ -23,7 +23,7 @@ $the_query = new WP_Query($args);
 					<div id="animation-home" class="clearfix  first">
 					<h1>
 						<div id="s1" class="title-block"> </div>
-						<div id="s2" class="title-block">Les réalisation</div>
+						<div id="s2" class="title-block">Les réalisations</div>
 						<div id="s3" class="title-block blue">de uzful</div>
 					</h1>
 
@@ -76,9 +76,9 @@ $the_query = new WP_Query($args);
 
 
 						    ?>
-						<a id="anchor-<?php the_ID(); ?>" name="<?php echo $post->post_name; ?>" data-title="<?php echo $post->post_title; ?>" data-sub="<?php echo $subtitle; ?>" class="anchor"></a>	
-						<div data-fullcontent="<?php the_permalink(); ?>" rel="post-<?php the_ID(); ?>"></div>
-					    <article id="sum-post-<?php the_ID(); ?>" <?php post_class('clearfix heightcol first'); ?> role="article">
+						<a id="anchor-<?php the_ID(); ?>" name="<?php echo $post->post_name; ?>" data-title="<?php echo $post->post_title; ?>" data-sub="<?php echo $subtitle; ?>" class="anchor-to-ajax"></a>	
+						<div data-fullcontent="<?php the_permalink(); ?>" data-rel="<?php echo $post->post_name; ?>"></div>
+					    <article id="sum-<?php echo $post->post_name; ?>" <?php post_class('clearfix heightcol first'); ?> role="article">
 
 						    <div class="head-wrapper sixcol first">
 							    <div class="alignleft" ><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail('uzful-thumb-180'); ?></a></div>

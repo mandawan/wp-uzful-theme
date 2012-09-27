@@ -166,7 +166,7 @@ background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1
 	section 
 	{
 		display: block;
-		padding-top:60px;
+		padding-top:85px;
 		padding-bottom: 85px;
 		
 		//background: white;
@@ -191,7 +191,7 @@ background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1
 
 	p.content-more {
 		margin-top: 25px;
-		height: 120px;
+		min-height: 90px;
 	}
 
 
@@ -208,27 +208,18 @@ background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1
 
 	}	
 
-	#home-works
-	{
-		article {
-			margin-bottom: 27px;
-			//margin-left: 27px;
-		}
-	}
-
 	#home-offers {
+		#offers {
+
+		}
 		a, a:active, a:hover {text-decoration: none;}
 		.title-wrap {
 			/*height:55px;*/ 
 			display:table; 
 			width:100%;
 
-			div {display:table-cell;vertical-align:bottom;
+			.vertalign();
 
-			}
-			.first {
-					//width: 75px;
-			}
 			img {
 				margin: 0;
 			}
@@ -241,15 +232,42 @@ background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1
 		article {
 			width:48%;
 			margin-left:2%;
+			margin-bottom: 15px;
 			float:left;
+			//margin-top:50px;
+		}
+	}
+
+	#home-works
+	{
+		#works {
+			margin-top:5em;
+		}
+		article {
+			margin-bottom: 27px;
+			//margin-left: 27px;
 		}
 	}
 
 	#home-extensions {
-
+		#extensions {
+			margin-top:5em;
+		}
 		article p {
 			-moz-column-count: 1; -webkit-column-count: 1; -moz-column-gap: 0; -webkit-column-gap: 0;
 		}
+	}
+
+	#home-clients .clients { 
+		margin-top:5em; 
+	}
+
+	#home-staff .staff { 
+		margin-top:5em;  
+	}
+
+	#home-partners .partners { 
+		margin-top:5em; 
 	}
 	
 }
@@ -297,8 +315,7 @@ SIDEBARS & ASIDES
 *********************/
 
 /* search form */
-div#search { margin-bottom: 15px; }
-#search-form-wrap
+/*#search-form-wrap
 {
 	//width:314px;
 	margin-top:-5px;
@@ -323,7 +340,7 @@ div#search { margin-bottom: 15px; }
 
 	input.submit {}
 }
-
+*/
 
 /*********************
 FOOTER STYLES
@@ -337,45 +354,40 @@ do they need tweaking?
 	ul {
 		li {}
 	}
-} 
+}
 .footer {
 	#inner-footer {
+		#map-container {
+
+		}
+
+		div.cell {
+			//display: table-cell;
+			//margin:0;
+			min-width:40%;
+			//text-align: center;
+			//margin-left: 70px;
+			
+		}
+
+		//NOTE exeptions dans la grille ... pas bien ! (a corriger dés que possible)
+		div.social-buttons {
+			width:auto;
+			div.alignleft {
+				padding:5px 25px 0 25px;
+			}
+		}
+
 		#address {
 			.fourcol();
-
 			div.column {
 				margin:15px 25px 15px 0;
 			}
 		}
-		#social-links
-		{	
+		#social-links {
+			margin-left: 1.5%;
 			.fourcol();
 			.last();
-			ul {
-				display:table;
-				width: 100%;
-				li {
-					//float:left;
-					//display: block;//
-					display: table-cell;
-					width:10%;
-					a{
-						width:100%;
-						height: 36px;
-
-						display: block;
-						
-						
-
-
-						&.first {
-							margin-top: 0;
-						}	
-					}
-				}
-			}
 		}
 	}
 }
-/* end .footer-links */
-			

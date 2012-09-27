@@ -154,7 +154,7 @@ single-bookmarks.php
 					
 						    <section class="post-content" >
 						    	<div id="chapeau" class="sixcol first post-content" >
-						    		<a href="<?php the_permalink() ?>" class="image-link" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo MultiPostThumbnails::the_post_thumbnail('folio_work', 'secondary-image', NULL,  'uzful-thumb-700'); ?></a>
+						    		<?php echo MultiPostThumbnails::the_post_thumbnail('folio_work', 'secondary-image', NULL,  'uzful-thumb-700'); ?>
 						    		<div id="sum" class="resume clearfix">
 									    <?php 
 									    
@@ -200,9 +200,9 @@ single-bookmarks.php
 									    		//var_dump($offers_query);
 									    		$first = true;
 								    			foreach ($partners as $partner) {
-
 								    				?>
-						    						<a class="image-link alignleft <?php if($first) echo 'first'; ?>" rel="user-profile" title="<?php //$employee->; ?>"><?php echo user_avatar_get_avatar($partner->ID, 72); ?></a>
+
+						    						<a class="image-link alignleft <?php if($first) echo 'first'; ?>" rel="user-profile" title="<?php echo $partner->display_name; ?>" href="<?php echo $partner->user_url; ?>"><?php echo user_avatar_get_avatar($partner->ID, 72); ?></a>
 						    						<?php
 								    				
 								    				$first = false;	
@@ -217,8 +217,8 @@ single-bookmarks.php
 
 						    		</div><!-- end  partners -->
 						    		<div id="client">
-						    			<h3>Une belle idée réalisée pour :</h3>
-						    			<a class="image-link alignleft"><?php echo user_avatar_get_avatar($client_id, 72); ?></a>
+						    			<h3>Une idée réalisée pour :</h3>
+						    			<a class="image-link alignleft"><?php echo user_avatar_get_avatar($client_id, 110); ?></a>
 						    		</div><!-- end  client -->
 						    	</div><!-- end  ressources -->
 						    	
@@ -240,10 +240,12 @@ single-bookmarks.php
 								</div><!-- end  links1 -->
 
 								<div id="links2" class="fivecol last">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php post_permalink() ?>" data-via="uzful" data-lang="fr" data-related="uzful">Tweeter</a>					
-									<div class="fb-like" data-href="<?php post_permalink() ?>" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false" data-font="verdana"></div>									
-									
-									<a href="<?php echo "http://pinterest.com/pin/create/button/?url=".urlencode(post_permalink())."&media=".urlencode(MultiPostThumbnails::get_post_thumbnail_url('folio_work', 'secondary-image'))."&description=".urlencode(the_excerpt()).""; ?>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+									<!-- Bouton Twitter -->
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo post_permalink(); ?>" data-via="uzful" data-lang="fr" data-related="uzful">Tweeter</a>					
+									<!-- Bouton Facebook -->
+									<div class="fb-like" data-href="<?php echo post_permalink(); ?>" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false" data-font="verdana"></div>									
+									<!-- Bouton Pinterest -->
+									<a href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode(post_permalink()); ?>&media=<?php echo urlencode(MultiPostThumbnails::get_post_thumbnail_url('folio_work', 'secondary-image')); ?>&description=" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
 								</div><!-- end  links1 -->
 						    	<div class="results fivecol first">
 						    		<div class="results-container">
@@ -260,7 +262,7 @@ single-bookmarks.php
 											<div class="image-replacement ico-tel first">Téléphone : </div><span class="tel">+33 1 47 85 21 47</span> <!-- classe hCard d’e-mail -->
 										</div>
 										<div class="cell">
-											<div class="image-replacement ico-email first">Email : </div><a class="email" href"mailto:<?php echo obfuscate_email('job@uzful.fr', 1, 0); ?>">Contacte-nous !</a> <!-- classe hCard d’e-mail -->
+											<div class="image-replacement ico-email first">Email : </div><a class="email" href"mailto:contact[atte]uzful[p]fr">Contacte-nous !</a> <!-- classe hCard d’e-mail -->
 										</div>
 						    		</div>
 						    	</div>

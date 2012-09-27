@@ -47,7 +47,8 @@ var $mainwrapper = jQuery('#main-wrapper'),
         contentFadeOut:             'contentFadeOut',
         contentFadeIn:              'contentFadeIn',
         contentFadeOutComplete:     'contentFadeOutComplete',
-        contentFadeInComplete:      'contentFadeInComplete'
+        contentFadeInComplete:      'contentFadeInComplete',
+        newContentDisplayed:        'newContentDisplayed'
     }
     viewport = {
         width:jQuery(window).width(),
@@ -60,7 +61,8 @@ var $mainwrapper = jQuery('#main-wrapper'),
         rootURL:'http://127.0.0.1/uzful.fr/www/'
     }
     $myEventDisatchObj = jQuery(EventDispatcher.getInstance()),
-    $anchorsListMenu = jQuery('#anchors-list');
+    $anchorsListMenu = jQuery('#anchors-list'),
+    hashtag='#!/',
   
 
 /**********************************************************************************************************
@@ -73,30 +75,70 @@ jQuery(document).ready(function($) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// ANTISCROLL
 ////////////////////////////////////////////////////////////////////////////////////////////
-    $(function () {
-        $mainwrapper
-        .wrap('<div id="box-antiscroll" class="box-wrap antiscroll-wrap" />')
-        .wrap('<div class="box" />')
-        .wrap('<div class="antiscroll-inner" />')
-        .wrap('<div class="box-inner" />');
+   
+    $mainwrapper
+    .wrap('<div id="box-antiscroll" class="box-wrap antiscroll-wrap" />')
+    .wrap('<div class="box" />')
+    .wrap('<div class="antiscroll-inner" />')
+    .wrap('<div class="box-inner" />');
 
-        
-        $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
-        scroller = $('#box-antiscroll').antiscroll().data('antiscroll');
+    
+    $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
+    scroller = $('#box-antiscroll').antiscroll().data('antiscroll');
 
-        //LISTENER
-        //refresh du scroll on content ajax load
-        $($myEventDisatchObj).on(customEvents.AJAXLoadEventComplete+' '+customEvents.imagesLoadEventComplete, function(o) {
+    //LISTENER
+    //refresh du scroll on content ajax load
+    $($myEventDisatchObj).on(customEvents.newContentDisplayed+' '+customEvents.imagesLoadEventComplete, function(o) {
 
-          scroller.refresh();
-          refreshDisplay();
-          //console.log("content loaded -> refresh scrollbar");
-          
-        });
-    });    
+      scroller.refresh();
+      handleNewContentDisplay();         
+      //console.log("content loaded -> refresh scrollbar");
+      
+    });
+  
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// CAROUSELS
+////////////////////////////////////////////////////////////////////////////////////////////
+//$('.infiniteCarousel').infiniteCarousel();
 
+myCarousel('#carousel-clients', '#forward-clients', '#back-clients', 150, 18, 6, 2, true, true);
+myCarousel('#carousel-staff', '#forward-staff', '#back-staff', 217, 18, 4, 2, false, true);
+myCarousel('#carousel-partners', '#forward-partners', '#back-partners', 135, 18, 6, 2, false, true);
+$('.caroufredsel_wrapper').css({margin:0});
+function myCarousel(target, fwd, back, size, marginRight, max, min, auto, debug)
+{
+    if(!debug) debug = false;
+    if(!auto) auto = false;
+    console.log("myCarousel", auto);
+    $(target).carouFredSel({
+            infinite            : true,
+            responsive          : true,
+            next                : fwd,
+            prev                : back,        
+            width               : '100%',
+            auto                : auto,
+            direction           : "left",
+            items: {
+                width: (size+marginRight),
+                height: size,  //  optionally resize item-height
+                visible: {
+                    min: min,
+                    max: max
+                }
+            },   
+            scroll : {
+                items           : max,
+                easing          : "easeOutQuad",
+                duration        : 400,                         
+                //pauseOnHover    : true,
+                wipe: true,
+                mousewheel: true
+
+            }                   
+        }, {debug:debug}); 
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// CONTENT
@@ -158,7 +200,18 @@ jQuery(document).ready(function($) {
         
     }
 
-
+    var hb = $('#home-blog');
+    if(hb.length)
+    {
+        var hmax; 
+        
+        $('#home-blog .vertalign div').each(function(){
+            console.log('pouet');
+            var h = $(this).height();
+            if(h > hmax)
+                $('#home-blog .vertalign div').css('height', h);
+        });
+    }
     
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// GMAPS
@@ -278,7 +331,9 @@ if($map.length)
     $(window).hashchange( function(){
         
         //requete navigation
-        navigateTo(window.location.href);
+        //s'il ne s'agit pas d'une ancre # classique mais bien du pattern 'hashtag' défini pour l'ajax
+        if(window.location.href.indexOf(hashtag)>-1)
+                navigateTo(window.location.href);
     });
     
     //détection d'un hash onload   
@@ -305,7 +360,10 @@ if($map.length)
         $('.antiscroll-inner, .box-inner').css({'height':viewport.height, 'width':viewport.width});
         if(scroller) scroller.refresh();
 
-        refreshDisplay();
+
+        $('.infiniteCarousel').children('.wrapper').css('width', $('.infiniteCarousel').innerWidth()- 64);
+
+        handleNewContentDisplay();
 
         responsiveRoutine();
     }).trigger('resize'); // we make a resize onready
@@ -552,9 +610,30 @@ function randomArrayValue(array) {
         return array[Math.floor(Math.random()*length)];
     else return 0;
 }
-function refreshDisplay()
+function handleNewContentDisplay()
 {   
+    console.log('handleNewContentDisplay');
+    //transition pane
     $('#transition-pane').css({'left':0, 'top':0, 'margin':0});
     $('#transition-pane').height(viewport.height);    
     $('#transition-pane').width(viewport.width);    
+
+    //treat obfuscated email and mailtos
+    //Pour tous les liens commençant par "mailto" ou les span ayant une class "wmail"
+    $('a[href^="schtroumpf="], span.wmail').each(function (i) {
+            //Remplacment du texte dans l'élément
+            var temp = $(this).html();
+            temp = temp.replace("schtroumpf=","mailto:");
+            temp = temp.replace("[pouet]","@");
+            temp = temp.replace("[lol]",".");
+            $(this).html(temp);
+            //Si il y a un attribut "href", on remplace le texte dans l'attribut
+            if($(this).attr("href")){
+                    var temphref = $(this).attr("href");
+                    temphref = temphref.replace("schtroumpf=","mailto:");
+                    temphref = temphref.replace("[pouet]","@");
+                    temphref = temphref.replace("[lol]",".");
+                    $(this).attr("href",temphref);
+            }
+    })
 }   

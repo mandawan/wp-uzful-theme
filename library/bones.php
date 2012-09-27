@@ -128,7 +128,7 @@ function bones_scripts_and_styles() {
     }
     
     //adding scripts file in the footer
-    wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/js/scripts.js', array( 'jquery', 'masonry-script', 'jquery-transit', 'antiscroll-script', 'mousewheel-script', 'gmaps' ), '1.0', true );  }
+    wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/js/scripts.js', array( 'jquery', 'jquery-easing', 'masonry-script', 'jquery-fred-carousel','jquery-infinite-carousel', 'jquery-transit', 'antiscroll-script', 'mousewheel-script', 'jquery-touchwipe', 'gmaps' ), '1.0', true );  }
 
     // enqueue styles and scripts
     wp_enqueue_script( 'bones-modernizr' ); 
@@ -363,7 +363,7 @@ function bones_filter_ptags_on_images($content){
 function bones_excerpt_more($more) {
 	global $post;
 	// edit here if you like
-	return '...  <a href="'. get_permalink($post->ID) . '" title="Read '.get_the_title($post->ID).'">Read more &raquo;</a>';
+	return '<a href="'. get_permalink($post->ID) . '" title="Read '.get_the_title($post->ID).'" class="read-more">[...]</a>';
 }
 
                   	

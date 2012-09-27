@@ -23,7 +23,7 @@ function initHistory()
     history.go(+1);
   });
 
-  histArray[0] = { title: 'home', url:params.rootURL, button: $('#history li:first')};
+  histArray[0] = { title: 'home', url:getRootURL(), button: $('#history li:first')};
 
   //TODO ici utiliser plutot le slot data() de jquery pour stocker les données historique dans chaque <li>
 }
@@ -33,7 +33,7 @@ function buildHistory()
 {
   if(params.firstPage) return;
 
-  var pUrl = params.rootURL;
+  var pUrl = getRootURL();
   pUrl += (dataDisplayed[0]) ? dataDisplayed[0] : '';
   pUrl += (dataDisplayed[1]) ? dataDisplayed[1] : '';
   var pTitle = document.title;
@@ -78,7 +78,7 @@ function buildHistory()
   }
   
   //cas particulier de l'url root -> le bouton est déjà présent et unique, l'entrée est laissée dans l'hitorique telle qu'à l'init
-  if(pUrl == params.rootURL) return;
+  if(pUrl === getRootURL()) return;
 
   //NOTE:on a reculé dans l'historique visuel -> MAJ l'historique data
   if(histIndex >= histArray.length)
